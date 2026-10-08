@@ -9,6 +9,7 @@ public class SpaceShip extends AbstractAnimated {
         super(game, xPosition, yPosition, sprite);
     }
 
+    @Override
     public void onCollisionWith(IAnimated other){
 
     }
