@@ -29,5 +29,15 @@ public class Shoot extends AbstractAnimated {
     public void onCollisionWithShot(IAnimated shot) {
 
     }
+    @Override
+    public boolean onStep(long delta) {
+        boolean moved = super.onStep(delta);
+
+        if (!moved && !isDestroyed()) {
+            game.removeAnimated(this);
+        }
+
+        return moved;
+    }
 
 }
