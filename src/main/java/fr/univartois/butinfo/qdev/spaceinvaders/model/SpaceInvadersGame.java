@@ -19,6 +19,7 @@ package fr.univartois.butinfo.qdev.spaceinvaders.model;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import fr.univartois.butinfo.qdev.spaceinvaders.controller.SpaceInvadersController;
 import fr.univartois.butinfo.qdev.spaceinvaders.view.ISpriteStore;
 import fr.univartois.butinfo.qdev.spaceinvaders.view.Sprite;
 import javafx.animation.AnimationTimer;
@@ -227,6 +228,12 @@ public final class SpaceInvadersGame {
     private void createAnimated() {
         // On commence par enlever tous les objets animés encore présents.
         clearAnimated();
+        int x = (getWidth() - spriteStore.getSpriteSize())/2;
+        int y = getBottomLimit();
+
+        ship = factory.createShip(x, y);
+        addMoving(ship);
+
 
         // TODO Créer le vaisseau du joueur et les aliens.
     }
@@ -266,7 +273,12 @@ public final class SpaceInvadersGame {
      * Cette méthode est sans effet si le délai entre deux tirs n'est pas atteint.
      */
     public void fireShot() {
-        // TODO Déclencher un tir, à condition que le délai ait été respecté.
+        long maintenant = System.currentTimeMillis();
+
+        if (maintenant - lastShot > SHOT_TEMPORIZATION) {
+            lastShot=maintenant;
+            addMoving(factory.createShot(ship.getX(), ship.getY()-5));
+        }
     }
 
     /**
@@ -276,14 +288,22 @@ public final class SpaceInvadersGame {
      * @param alien L'alien qui a été tué.
      */
     public void alienIsDead(IAnimated alien) {
-        // TODO Mettre à jour l'état du jeu.
+        if (alien.isDestroyed()){
+            nbRemainingAliens--;
+        }
+        if (nbRemainingAliens==0) {
+            controller.gameOver("You win !");
+        }
     }
 
     /**
      * Réduit la vie du joueur, et interrompt la partie si elle atteint 0.
      */
     public void reducePlayerLife() {
-        // TODO Réduire la vie du joueur.
+        life.set(life.get() - 1);
+        if (life.get()==0){
+            playerIsDead();
+        }
     }
 
     /**
