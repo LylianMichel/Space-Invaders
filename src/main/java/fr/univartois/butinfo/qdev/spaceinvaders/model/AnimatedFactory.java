@@ -1,6 +1,8 @@
 package fr.univartois.butinfo.qdev.spaceinvaders.model;
 
+import fr.univartois.butinfo.qdev.spaceinvaders.model.animated.SpaceShip;
 import fr.univartois.butinfo.qdev.spaceinvaders.view.ISpriteStore;
+import fr.univartois.butinfo.qdev.spaceinvaders.view.Sprite;
 
 public class AnimatedFactory implements IAnimatedFactory {
 
@@ -24,7 +26,7 @@ public class AnimatedFactory implements IAnimatedFactory {
 
     @Override
     public IAnimated createShip(int x, int y) {
-        return null;
+        return new SpaceShip(newgame ,x , y , newspriteStore.getSprite());
     }
 
     @Override
