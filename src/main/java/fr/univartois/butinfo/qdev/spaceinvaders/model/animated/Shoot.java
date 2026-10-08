@@ -14,10 +14,14 @@ public class Shoot extends AbstractAnimated {
     }
 
 
+
     @Override
     public void onCollisionWith(IAnimated other) {
-        game.removeAnimated(this);
+        if (!isDestroyed()) {
+            game.removeAnimated(this);
+        }
     }
+
 
     @Override
     public void onCollisionWithAlien(IAnimated alien) {
@@ -39,5 +43,8 @@ public class Shoot extends AbstractAnimated {
 
         return moved;
     }
+
+
+
 
 }
