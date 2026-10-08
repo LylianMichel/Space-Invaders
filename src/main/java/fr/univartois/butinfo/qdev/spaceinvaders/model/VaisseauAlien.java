@@ -17,6 +17,9 @@ publlic class VaisseauAlien extends AbstractAnimated{
             setHorizontalSpeed(-getHorizontalSpeed());
             setVerticalSpeed(getVerticalSpeed() * 1.02);
         }
+        if (game.getBottomLimit()) {
+            game.alienReachedPlanet();
+        }
     }
 
 }
