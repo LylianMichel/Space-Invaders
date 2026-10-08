@@ -277,13 +277,13 @@ SpaceInvadersController o-- "1" SpaceInvadersGame
 
 ### Jalon n°1 - TP n°3
 
-| Fonctionnalité                             | Terminée ? | Auteur(s)                                     |
-| ------------------------------------------ | ---------- | --------------------------------------------- |
-| Représentation d'un tir                    |            |                                               |
-| Représentation du vaisseau du joueur       |            |                                               |
-| Représentation d'un vaisseau alien         |            |                                               |
-| Gestion des collisions spécifiques         |            |                                               |
-| Création des différents éléments du jeu    |            |                                               |
-| Intégration des vaisseaux dans la partie   |            |                                               |
-| Gestion du tir allié                       |            |                                               |
-| Gestion de la fin de partie                |            |                                               |
+| Fonctionnalité                             | Terminée ? | Auteur(s) |
+| ------------------------------------------ |------------|-----------|
+| Représentation d'un tir                    | oui        | lylian    |
+| Représentation du vaisseau du joueur       | oui        | maxence   |
+| Représentation d'un vaisseau alien         | oui        | alice     |
+| Gestion des collisions spécifiques         | oui        | lylian    |
+| Création des différents éléments du jeu    | oui        | alice     |
+| Intégration des vaisseaux dans la partie   | oui        | maxence   |
+| Gestion du tir allié                       | oui        | gautier   |
+| Gestion de la fin de partie                | oui        | gautier   |
