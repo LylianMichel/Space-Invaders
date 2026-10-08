@@ -23,8 +23,6 @@ publlic class VaisseauAlien extends AbstractAnimated{
     }
 
     @Override
-    public void isCollidingWith(IAnimated other){
-
-    }
+    public void isCollidingWith(IAnimated other){ }
 
 }
