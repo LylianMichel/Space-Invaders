@@ -266,7 +266,12 @@ public final class SpaceInvadersGame {
      * Cette méthode est sans effet si le délai entre deux tirs n'est pas atteint.
      */
     public void fireShot() {
-        // TODO Déclencher un tir, à condition que le délai ait été respecté.
+        long maintenant = System.currentTimeMillis();
+
+        if (maintenant - lastShot > SHOT_TEMPORIZATION) {
+            lastShot=maintenant;
+            addMoving(factory.createShot(ship.getX(), ship.getY()-5));
+        }
     }
 
     /**
