@@ -2,7 +2,7 @@ package fr.univartois.butinfo.qdev.spaceinvaders.model;
 
 import fr.univartois.butinfo.qdev.spaceinvaders.model.IAnimated;
 
-publlic class VaisseauAlien extends AbstractAnimated{
+public class VaisseauAlien extends AbstractAnimated{
 
     public VaisseauAlien(SpaceInvadersGame game, double x, double y, Sprite sprite) {
         super(game, x, y, sprite);
@@ -24,5 +24,16 @@ publlic class VaisseauAlien extends AbstractAnimated{
 
     @Override
     public void isCollidingWith(IAnimated other){ }
+
+    public void playerIsDead() {
+        animation.stop();
+        controller.gameOver("Le joeur est mort!");
+    }
+
+    public void alienReachedPlanet() {
+        animation.stop();
+        controller.gameOver("Les aliens ont envahi la planète!");
+    }
+
 
 }
