@@ -227,13 +227,23 @@ public final class SpaceInvadersGame {
     private void createAnimated() {
         // On commence par enlever tous les objets animés encore présents.
         clearAnimated();
+
+        // Création du vaisseau
         int x = (getWidth() - spriteStore.getSpriteSize())/2;
         int y = getBottomLimit();
 
         ship = factory.createShip(x, y);
         addMoving(ship);
 
-
+        // Création des vaisseaux aliens
+        int NB_ALIENS = 3;
+        for(int i = 0; i < NB_ALIENS; i++){
+            int alienX = (getWidth() - spriteStore.getSpriteSize())/2;
+            int alienY = getTopLimit() + i * spriteStore.getSpriteSize();
+            // créer l'alien, l'ajouter, incrémenter le compteur
+            alien = factory.createAlien(alienX, alienY);
+            addMoving(alien);
+        }
         // TODO Créer le vaisseau du joueur et les aliens.
     }
 
