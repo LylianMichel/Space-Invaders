@@ -406,6 +406,16 @@ public abstract class AbstractAnimated implements IAnimated {
      * @see fr.univartois.butinfo.qdev.spaceinvaders.model.IAnimated#onDespawn()
      */
     @Override
+    public void onCollisionWithAlien(IAnimated alien) {
+        // Aucun effet par défaut.
+    }
+
+    @Override
+    public void onCollisionWithShot(IAnimated shot) {
+        // Aucun effet par défaut.
+    }
+
+    @Override
     public void onDespawn() {
         // Par défaut, cette méthode ne fait rien.
     }
