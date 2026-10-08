@@ -7,9 +7,12 @@ import fr.univartois.butinfo.qdev.spaceinvaders.view.Sprite;
 
 public class Shoot extends AbstractAnimated {
 
+
     public Shoot(SpaceInvadersGame game, double x, double y, Sprite sprite) {
         super(game, x, y, sprite);
+        setVerticalSpeed(-300);
     }
+
 
     @Override
     public void onCollisionWith(IAnimated other) {
@@ -21,8 +24,10 @@ public class Shoot extends AbstractAnimated {
 
     }
 
+
     @Override
     public void onCollisionWithShot(IAnimated shot) {
 
     }
+
 }
