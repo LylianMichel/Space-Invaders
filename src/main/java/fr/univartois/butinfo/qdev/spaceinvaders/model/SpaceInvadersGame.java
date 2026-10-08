@@ -19,6 +19,7 @@ package fr.univartois.butinfo.qdev.spaceinvaders.model;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import fr.univartois.butinfo.qdev.spaceinvaders.controller.SpaceInvadersController;
 import fr.univartois.butinfo.qdev.spaceinvaders.view.ISpriteStore;
 import fr.univartois.butinfo.qdev.spaceinvaders.view.Sprite;
 import javafx.animation.AnimationTimer;
@@ -281,6 +282,12 @@ public final class SpaceInvadersGame {
      * @param alien L'alien qui a été tué.
      */
     public void alienIsDead(IAnimated alien) {
+        if (alien.isDestroyed()){
+            nbRemainingAliens--;
+        }
+        if (nbRemainingAliens==0) {
+            controller.gameOver("You win !");
+        }
         // TODO Mettre à jour l'état du jeu.
     }
 
