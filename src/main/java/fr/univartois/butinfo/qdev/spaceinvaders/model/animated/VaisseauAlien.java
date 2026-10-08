@@ -27,6 +27,6 @@ public class VaisseauAlien extends AbstractAnimated {
 
     @Override
     public void onCollisionWith(IAnimated other) {
-        //ne fait rien
+        //vide
     }
 }
