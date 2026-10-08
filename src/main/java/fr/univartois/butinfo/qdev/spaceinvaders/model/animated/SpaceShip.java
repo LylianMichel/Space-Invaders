@@ -11,6 +11,6 @@ public class SpaceShip extends AbstractAnimated {
 
     @Override
     public void onCollisionWith(IAnimated other){
-
+        // Le vaisseau ne réagit pas aux collisions (géré par le Membre n°1).
     }
 }
