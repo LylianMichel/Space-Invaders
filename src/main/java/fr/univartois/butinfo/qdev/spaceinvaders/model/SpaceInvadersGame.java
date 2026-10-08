@@ -241,7 +241,7 @@ public final class SpaceInvadersGame {
             int alienX = (getWidth() - spriteStore.getSpriteSize())/2;
             int alienY = getTopLimit() + i * spriteStore.getSpriteSize();
             // créer l'alien, l'ajouter, incrémenter le compteur
-            alien = factory.createAlien(alienX, alienY);
+            IAnimated alien = factory.createAlien(alienX, alienY);
             addMoving(alien);
         }
         // TODO Créer le vaisseau du joueur et les aliens.
