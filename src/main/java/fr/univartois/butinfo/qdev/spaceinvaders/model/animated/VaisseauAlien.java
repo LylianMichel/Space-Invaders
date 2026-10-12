@@ -13,9 +13,24 @@ public class VaisseauAlien extends AbstractAnimated {
     }
 
     @Override
+    public void onCollisionWith(IAnimated other) {
+        if (!isDestroyed() && !other.isDestroyed()) {
+            other.onCollisionWithAlien(this);
+        }
+    }
+
+    @Override
+    public void onCollisionWithShot(IAnimated shot) {
+        if (!isDestroyed() && !shot.isDestroyed()) {
+            game.alienIsDead(this);
+            game.removeAnimated(shot);
+        }
+    }
+    
+    @Override
     public boolean onStep(long delta) {
         boolean limiteEcran = super.onStep(delta);
-        if (limiteEcran) {
+        if (!limiteEcran) {
             setHorizontalSpeed(-getHorizontalSpeed());
             setVerticalSpeed(getVerticalSpeed() * 1.02);
         }
@@ -25,8 +40,4 @@ public class VaisseauAlien extends AbstractAnimated {
         return limiteEcran;
     }
 
-    @Override
-    public void onCollisionWith(IAnimated other) {
-        //ne fait rien
-    }
 }
