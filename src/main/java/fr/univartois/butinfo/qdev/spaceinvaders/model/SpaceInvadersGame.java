@@ -288,7 +288,7 @@ public final class SpaceInvadersGame {
 
         if (maintenant - lastShot > SHOT_TEMPORIZATION) {
             lastShot=maintenant;
-            addMoving(factory.createShot(ship.getX(), ship.getY()-5));
+            addMoving(factory.createShot(ship.getX(), ship.getY()-35));
         }
     }
 
@@ -299,22 +299,12 @@ public final class SpaceInvadersGame {
      * @param alien L'alien qui a été tué.
      */
     public void alienIsDead(IAnimated alien) {
-        if (alien.isDestroyed()) {
-            return;
-        }
-
-        gameAlienRemoved(alien);
-    }
-
-    private void gameAlienRemoved(IAnimated alien) {
-        removeAnimated(alien);
-        score.set(score.get() + 1);
-        if (nbRemainingAliens > 0) {
+        if (alien.isDestroyed()){
             nbRemainingAliens--;
-            if (nbRemainingAliens == 0) {
-                animation.stop();
-                controller.gameOver("You win !");
-            }
+        }
+        if (nbRemainingAliens==0) {
+            animation.stop();
+            controller.gameOver("You win !");
         }
     }
 
@@ -322,11 +312,9 @@ public final class SpaceInvadersGame {
      * Réduit la vie du joueur, et interrompt la partie si elle atteint 0.
      */
     public void reducePlayerLife() {
-        if (life.get() > 0) {
-            life.set(life.get() - 1);
-            if (life.get() == 0) {
-                playerIsDead();
-            }
+        life.set(life.get() - 1);
+        if (life.get()==0){
+            playerIsDead();
         }
     }
 
