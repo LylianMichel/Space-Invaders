@@ -263,6 +263,20 @@ public interface IAnimated {
     void onCollisionWithShot(IAnimated shot);
 
     /**
+     * Réagit à une collision avec un alien.
+     *
+     * @param alien L'alien avec lequel cet objet est entré en collision.
+     */
+    void onCollisionWithAlien(IAnimated alien);
+
+    /**
+     * Réagit à une collision avec un tir.
+     *
+     * @param shot Le tir avec lequel cet objet est entré en collision.
+     */
+    void onCollisionWithShot(IAnimated shot);
+
+    /**
      * Réinitialise ou libère certaines ressources lorsque cet objet animé est retiré de
      * l'affichage, sans toutefois être retiré du jeu.
      */
