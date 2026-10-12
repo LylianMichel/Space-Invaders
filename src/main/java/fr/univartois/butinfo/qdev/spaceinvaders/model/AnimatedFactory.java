@@ -1,6 +1,8 @@
 package fr.univartois.butinfo.qdev.spaceinvaders.model;
 
+import fr.univartois.butinfo.qdev.spaceinvaders.model.animated.Shoot;
 import fr.univartois.butinfo.qdev.spaceinvaders.model.animated.SpaceShip;
+import fr.univartois.butinfo.qdev.spaceinvaders.model.animated.VaisseauAlien;
 import fr.univartois.butinfo.qdev.spaceinvaders.view.ISpriteStore;
 import fr.univartois.butinfo.qdev.spaceinvaders.view.Sprite;
 
@@ -20,9 +22,7 @@ public class AnimatedFactory implements IAnimatedFactory {
     }
 
     @Override
-    public IAnimated createAlien(int x, int y) {
-        return null;
-    }
+    public IAnimated createAlien(int x, int y) {return new VaisseauAlien(newgame , x , y , newspriteStore.getSprite());}
 
     @Override
     public IAnimated createShip(int x, int y) {
@@ -31,6 +31,5 @@ public class AnimatedFactory implements IAnimatedFactory {
 
     @Override
     public IAnimated createShot(int x, int y) {
-        return null;
-    }
-}
+        return new Shoot(newgame , x , y , newspriteStore.getSprite());
+    }}
