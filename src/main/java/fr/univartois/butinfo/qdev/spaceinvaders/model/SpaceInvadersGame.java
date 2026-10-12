@@ -228,13 +228,24 @@ public final class SpaceInvadersGame {
     private void createAnimated() {
         // On commence par enlever tous les objets animés encore présents.
         clearAnimated();
+
+        // Création du vaisseau
         int x = (getWidth() - spriteStore.getSpriteSize())/2;
         int y = getBottomLimit();
 
         ship = factory.createShip(x, y);
         addMoving(ship);
 
-
+        // Création des vaisseaux aliens
+        int NB_ALIENS = 3;
+        for(int i = 0; i < NB_ALIENS; i++){
+            nbRemainingAliens ++;
+            int alienX = (getWidth() - spriteStore.getSpriteSize())/2;
+            int alienY = getTopLimit() + i * spriteStore.getSpriteSize();
+            // créer l'alien, l'ajouter, incrémenter le compteur
+            IAnimated alien = factory.createAlien(alienX, alienY);
+            addMoving(alien);
+        }
         // TODO Créer le vaisseau du joueur et les aliens.
     }
 
@@ -292,6 +303,7 @@ public final class SpaceInvadersGame {
             nbRemainingAliens--;
         }
         if (nbRemainingAliens==0) {
+            animation.stop();
             controller.gameOver("You win !");
         }
     }
@@ -310,14 +322,17 @@ public final class SpaceInvadersGame {
      * Termine la partie lorsque le joueur est tué.
      */
     public void playerIsDead() {
-        // TODO Interrompre la partie.
+        animation.stop();
+        controller.gameOver("Le joueur est mort !");
     }
 
     /**
      * Termine la partie lorsque les aliens atteignent la planète.
      */
+
     public void alienReachedPlanet() {
-        // TODO Interrompre la partie.
+        animation.stop();
+        controller.gameOver("Les aliens ont envahi la planète !");
     }
 
     /**

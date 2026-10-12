@@ -5,12 +5,28 @@ import fr.univartois.butinfo.qdev.spaceinvaders.model.SpaceInvadersGame;
 import fr.univartois.butinfo.qdev.spaceinvaders.view.Sprite;
 
 public class SpaceShip extends AbstractAnimated {
-    public SpaceShip(SpaceInvadersGame game, double xPosition, double yPosition, Sprite sprite){
+
+    public SpaceShip(SpaceInvadersGame game, double xPosition, double yPosition, Sprite sprite) {
         super(game, xPosition, yPosition, sprite);
     }
 
     @Override
-    public void onCollisionWith(IAnimated other){
-        // Le vaisseau ne réagit pas aux collisions (géré par le Membre n°1).
+    public void onCollisionWith(IAnimated other) {
+        // La réaction au type de l'autre objet est gérée par son double dispatch.
+    }
+
+    @Override
+    public void onCollisionWithAlien(IAnimated alien) {
+        if (!isDestroyed() && !alien.isDestroyed()) {
+            game.playerIsDead();
+        }
+    }
+
+    @Override
+    public void onCollisionWithShot(IAnimated shot) {
+        if (!isDestroyed() && !shot.isDestroyed()) {
+            game.removeAnimated(shot);
+            game.reducePlayerLife();
+        }
     }
 }
