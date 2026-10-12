@@ -288,7 +288,7 @@ public final class SpaceInvadersGame {
 
         if (maintenant - lastShot > SHOT_TEMPORIZATION) {
             lastShot=maintenant;
-            addMoving(factory.createShot(ship.getX(), ship.getY()-5));
+            addMoving(factory.createShot(ship.getX(), ship.getY()-35));
         }
     }
 
