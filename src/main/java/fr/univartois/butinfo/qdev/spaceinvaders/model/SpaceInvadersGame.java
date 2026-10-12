@@ -292,6 +292,7 @@ public final class SpaceInvadersGame {
             nbRemainingAliens--;
         }
         if (nbRemainingAliens==0) {
+            animation.stop();
             controller.gameOver("You win !");
         }
     }
