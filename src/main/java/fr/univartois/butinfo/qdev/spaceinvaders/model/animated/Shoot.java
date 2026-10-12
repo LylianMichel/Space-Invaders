@@ -31,6 +31,7 @@ public class Shoot extends AbstractAnimated {
     @Override
     public void onCollisionWithAlien(IAnimated alien) {
         if (!isDestroyed() && !alien.isDestroyed()) {
+            game.removeAnimated(alien);
             game.alienIsDead(alien);
             game.removeAnimated(this);
         }
@@ -40,6 +41,7 @@ public class Shoot extends AbstractAnimated {
     public void onCollisionWithShot(IAnimated shot) {
         if (!isDestroyed() && !shot.isDestroyed()) {
             game.removeAnimated(shot);
+            game.alienIsDead(shot);
             game.removeAnimated(this);
         }
     }
