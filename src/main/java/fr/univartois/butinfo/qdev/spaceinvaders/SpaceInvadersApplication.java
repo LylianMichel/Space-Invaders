@@ -82,8 +82,8 @@ public final class SpaceInvadersApplication extends Application {
      *
      * @see #launch(String...)
      */
-    static void main() {
-        launch();
+    public static void main(String[] args) {
+        launch(args);
     }
 
 }
