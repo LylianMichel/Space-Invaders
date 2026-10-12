@@ -287,3 +287,4 @@ SpaceInvadersController o-- "1" SpaceInvadersGame
 | Intégration des vaisseaux dans la partie   | oui        | maxence   |
 | Gestion du tir allié                       | oui        | gautier   |
 | Gestion de la fin de partie                | oui        | gautier   |
+Martin a participe au test du space invaders
