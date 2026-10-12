@@ -32,6 +32,5 @@ public class AnimatedFactory implements IAnimatedFactory {
 
     @Override
     public IAnimated createShot(int x, int y) {
-
         return new Shoot(newgame , x , y , newspriteStore.getSprite("shot"));
     }}
