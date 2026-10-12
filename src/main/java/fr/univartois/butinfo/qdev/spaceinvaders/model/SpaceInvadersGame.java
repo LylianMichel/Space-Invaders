@@ -290,14 +290,17 @@ public final class SpaceInvadersGame {
      * Termine la partie lorsque le joueur est tué.
      */
     public void playerIsDead() {
-        // TODO Interrompre la partie.
+        animation.stop();
+        controller.gameOver("Le joueur est mort !");
     }
 
     /**
      * Termine la partie lorsque les aliens atteignent la planète.
      */
+
     public void alienReachedPlanet() {
-        // TODO Interrompre la partie.
+        animation.stop();
+        controller.gameOver("Les aliens ont envahi la planète !");
     }
 
     /**
