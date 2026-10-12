@@ -299,22 +299,12 @@ public final class SpaceInvadersGame {
      * @param alien L'alien qui a été tué.
      */
     public void alienIsDead(IAnimated alien) {
-        if (alien.isDestroyed()) {
-            return;
-        }
-
-        gameAlienRemoved(alien);
-    }
-
-    private void gameAlienRemoved(IAnimated alien) {
-        removeAnimated(alien);
-        score.set(score.get() + 1);
-        if (nbRemainingAliens > 0) {
+        if (alien.isDestroyed()){
             nbRemainingAliens--;
-            if (nbRemainingAliens == 0) {
-                animation.stop();
-                controller.gameOver("You win !");
-            }
+        }
+        if (nbRemainingAliens==0) {
+            animation.stop();
+            controller.gameOver("You win !");
         }
     }
 
