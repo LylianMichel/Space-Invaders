@@ -256,12 +256,6 @@ public interface IAnimated {
      */
     void onCollisionWith(IAnimated other);
 
-    /** Réagit à une collision avec un alien. */
-    void onCollisionWithAlien(IAnimated alien);
-
-    /** Réagit à une collision avec un tir. */
-    void onCollisionWithShot(IAnimated shot);
-
     /**
      * Réagit à une collision avec un alien.
      *
