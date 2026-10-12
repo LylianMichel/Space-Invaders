@@ -26,4 +26,18 @@ public class VaisseauAlien extends AbstractAnimated {
             game.removeAnimated(shot);
         }
     }
+    
+    @Override
+    public boolean onStep(long delta) {
+        boolean limiteEcran = super.onStep(delta);
+        if (!limiteEcran) {
+            setHorizontalSpeed(-getHorizontalSpeed());
+            setVerticalSpeed(getVerticalSpeed() * 1.02);
+        }
+        if (getY() + getHeight() >= game.getBottomLimit()) {
+            game.alienReachedPlanet();
+        }
+        return limiteEcran;
+    }
+
 }
