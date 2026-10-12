@@ -6,7 +6,7 @@ import fr.univartois.butinfo.qdev.spaceinvaders.model.animated.VaisseauAlien;
 import fr.univartois.butinfo.qdev.spaceinvaders.view.ISpriteStore;
 import fr.univartois.butinfo.qdev.spaceinvaders.view.Sprite;
 
-public class AnimatedFactory implements IAnimatedFactory {
+public  class AnimatedFactory implements IAnimatedFactory {
 
     private ISpriteStore newspriteStore;
     private SpaceInvadersGame newgame;
@@ -33,4 +33,8 @@ public class AnimatedFactory implements IAnimatedFactory {
     @Override
     public IAnimated createShot(int x, int y) {
         return new Shoot(newgame , x , y , newspriteStore.getSprite("shot"));
-    }}
+
+    }
+}
+
+
