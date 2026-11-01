@@ -46,6 +46,11 @@ public final class SpaceInvadersGame {
     private static final long SHOT_TEMPORIZATION = 500;
 
     /**
+     * La temporisation contraignant le délai entre deux apparitions de bonus.
+     */
+    private static final long BONUS_TEMPORIZATION = 20000;
+
+    /**
      * La largeur sur laquelle les objets du jeu peuvent se déplacer (en pixels).
      */
     private final int width;
@@ -69,6 +74,12 @@ public final class SpaceInvadersGame {
      * Le vaisseau du joueur.
      */
     private IAnimated ship;
+
+    /**
+     * Le délai depuis la dernière apparition d'un bonus.
+     * Lorsque ce délai atteint 20 secondes, un nouveau bonus peut apparaître.
+     */
+    private long lastBonusDrop = 0;
 
     /**
      * Le timestamp du dernier tir.
@@ -104,7 +115,7 @@ public final class SpaceInvadersGame {
     /**
      * L'animation du jeu, qui permet aux différents objets de se déplacer.
      */
-    private final AnimationTimer animation = new GameAnimation(movingObjects, animatedObjects);
+    private final AnimationTimer animation = new GameAnimation(this, movingObjects, animatedObjects);
 
     /**
      * Le contrôleur du jeu.
@@ -238,6 +249,32 @@ public final class SpaceInvadersGame {
         life.set(3);
         score.set(0);
         nbRemainingAliens = 0;
+    }
+
+    /**
+     * Modifie l'état du jeu après un certain délai.
+     *
+     * @param timeDelta Le temps écoulé depuis la dernière mise à jour du jeu
+     *        (en millisecondes).
+     */
+    public void onStep(long timeDelta) {
+        // On regarde s'il est temps de déposer un bonus.
+        lastBonusDrop += timeDelta;
+        if (lastBonusDrop >= BONUS_TEMPORIZATION) {
+            dropBonus();
+            lastBonusDrop = 0;
+        }
+    }
+
+    /**
+     * Fait apparaître aléatoirement un bonus.
+     * Cette méthode est appelée régulièrement, avec un délai de
+     * {@link #BONUS_TEMPORIZATION} entre chaque appel.
+     *
+     * @see #onStep(long)
+     */
+    private void dropBonus() {
+        // TODO Complétez cette méthode pour faire apparaître un bonus.
     }
 
     /**
