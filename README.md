@@ -17,6 +17,10 @@ Vous pouvez retrouver ci-dessous les liens vers les sujets de TP vous guidant
 dans le développement de votre projet :
 
 - [Lancement du projet *Space-Invaders*](https://gitlab.univ-artois.fr/enseignements-rwa/modules/but-2/r3-04/tp/-/tree/main/tp/TP03)
+- [Des patrons de conception dans *Space-Invaders* (1)](https://gitlab.univ-artois.fr/enseignements-rwa/modules/but-2/r3-04/tp/-/tree/main/tp/TP04)
+- [Des patrons de conception dans *Space-Invaders* (2)](https://gitlab.univ-artois.fr/enseignements-rwa/modules/but-2/r3-04/tp/-/tree/main/tp/TP05)
+- [Des patrons de conception dans *Space-Invaders* (3)](https://gitlab.univ-artois.fr/enseignements-rwa/modules/but-2/r3-04/tp/-/tree/main/tp/TP06)
+- [Bonnes pratiques de la POO dans le projet *Space-Invaders*](https://gitlab.univ-artois.fr/enseignements-rwa/modules/but-2/r3-04/tp/-/tree/main/tp/TP07)
 
 ## Diagramme de classes
 
@@ -301,3 +305,38 @@ SpaceInvadersController o-- "1" ISpriteStore
 | ------------------------------------------ | ---------------------- | ---------- | --------------------------------------------- |
 | Variantes de déplacement pour les aliens   |                        |            |                                               |
 | Variantes de tir pour les aliens           |                        |            |                                               |
+
+### Jalon n°3 - TP n°5
+
+| Fonctionnalité                             | Patron de Conception ? | Terminée ? | Auteur(s)                                     |
+| ------------------------------------------ | ---------------------- | ---------- | --------------------------------------------- |
+| Gestion des points de vie des aliens       |                        |            |                                               |
+| Gestion des points de vie du joueur        |                        |            |                                               |
+| Gestion de l'invulnérabilité               |                        |            |                                               |
+| Implémentation de la vulnérabilité         |                        |            |                                               |
+| Implémentation de l'invulnérabilité        |                        |            |                                               |
+| Gestion des bonus                          |                        |            |                                               |
+| Implémentation du bonus de vie             |                        |            |                                               |
+| Implémentation du bonus d'invulnérabilité  |                        |            |                                               |
+| Gestion des murs de protection             |                        |            |                                               |
+| Implémentation des dégradations des murs   |                        |            |                                               |
+
+### Jalon n°4 - TP n°6
+
+| Fonctionnalité                                         | Patron de Conception ? | Terminée ? | Auteur(s)                                     |
+| ------------------------------------------------------ | ---------------------- | ---------- | --------------------------------------------- |
+| Définition d'un seul `SpriteStore`                     |                        |            |                                               |
+| Définition d'une seule instance quand c'est possible   |                        |            |                                               |
+| Implémentation du déplacement des aliens en escadrille |                        |            |                                               |
+| Implémentation du changement de déplacement des aliens |                        |            |                                               |
+| Implémentation du changement de tir des aliens         |                        |            |                                               |
+| Implémentation des différents niveau du jeu            |                        |            |                                               |
+
+### Jalon n°5 - TP n°7
+
+| Fonctionnalité                             | Terminée ? | Auteur(s)                                     |
+| ------------------------------------------ | ---------- | --------------------------------------------- |
+| Correction des avertissements              |            |                                               |
+| Correction des défauts sur *SonarQube*     |            |                                               |
+| Rangement des classes en paquetages        |            |                                               |
+| Modularisation du projet                   |            |                                               |
