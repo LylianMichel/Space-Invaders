@@ -1,5 +1,8 @@
 package fr.univartois.butinfo.qdev.spaceinvaders.model;
 
+import fr.univartois.butinfo.qdev.spaceinvaders.model.animated.VaisseauAlien;
+import fr.univartois.butinfo.qdev.spaceinvaders.view.Sprite;
+
 public interface StrategyShoot {
-    public boolean onShoot();
+    public boolean onShoot(VaisseauAlien vaisseau, SpaceInvadersGame game, Sprite sprite);
 }

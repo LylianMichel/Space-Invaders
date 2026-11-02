@@ -1,7 +1,8 @@
 package fr.univartois.butinfo.qdev.spaceinvaders.model;
 
 import fr.univartois.butinfo.qdev.spaceinvaders.model.animated.VaisseauAlien;
-import fr.univartois.butinfo.qdev.spaceinvaders.view.Sprite;
+import fr.univartois.dpprocessor.designpatterns.strategy.StrategyDesignPattern;
+import fr.univartois.dpprocessor.designpatterns.strategy.StrategyParticipant;
 
 public class StrategyMouvementBase implements StrategyMouvement{
 

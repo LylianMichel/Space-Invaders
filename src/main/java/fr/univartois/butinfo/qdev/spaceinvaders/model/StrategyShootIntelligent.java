@@ -16,7 +16,7 @@ public class StrategyShootIntelligent implements StrategyShoot{
     }
 
     @Override
-    public boolean onShoot() {
+    public boolean onShoot(VaisseauAlien vaisseau, SpaceInvadersGame game, Sprite sprite) {
         return Math.abs(alien.getX() - ship.getX())<ecart;
     }
 
