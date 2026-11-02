@@ -276,6 +276,28 @@ class SpaceInvadersController implements ISpaceInvadersController {
     + reset() : void
 }
 
+SpaceInvadersController o-- "1" SpaceInvadersGame
+
+' Stratégies de déplacement des aliens (TP n°4) '
+interface StrategyMouvement {
+    + onStep(delta : long) : boolean
+}
+
+class VaisseauAlien extends AbstractAnimated {
+    - strategyMouvement : StrategyMouvement
+    + deplacer(delta : long) : boolean
+    + setStrategyMouvement(strategy : StrategyMouvement) : void
+}
+
+class StrategyMouvementBase implements StrategyMouvement
+class StrategyMouvementAleatoire implements StrategyMouvement {
+    - random : Random
+    - tempsEcoule : long
+}
+
+VaisseauAlien o-- "1" StrategyMouvement
+StrategyMouvementBase --> VaisseauAlien
+StrategyMouvementAleatoire --> VaisseauAlien
 SpaceInvadersController *-- "1" SpaceInvadersGame
 SpaceInvadersController o-- "1" ISpriteStore
 ```
