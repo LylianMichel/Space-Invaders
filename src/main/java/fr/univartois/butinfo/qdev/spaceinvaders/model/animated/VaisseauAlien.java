@@ -13,8 +13,7 @@ public class VaisseauAlien extends AbstractAnimated {
         setHorizontalSpeed(75);
         setVerticalSpeed(50);
         setStrategyShoot(new StrategyShootBase());
-        setStrategyMouvement(new StrategyMouvementAleatoire());
-
+        setStrategyMouvement(new StrategyMouvementBase());
     }
 
     public boolean onStepBase(long delta) {
