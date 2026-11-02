@@ -4,20 +4,17 @@ import fr.univartois.butinfo.qdev.spaceinvaders.model.animated.VaisseauAlien;
 import fr.univartois.dpprocessor.designpatterns.strategy.StrategyDesignPattern;
 import fr.univartois.dpprocessor.designpatterns.strategy.StrategyParticipant;
 
-@StrategyDesignPattern(strategy = StrategyMouvement.class, participant = StrategyParticipant.IMPLEMENTATION)
-public class StrategyMouvementBase implements StrategyMouvement {
-    private final VaisseauAlien alien;
-
-    public StrategyMouvementBase(VaisseauAlien alien) {
-        this.alien = alien;
-    }
+public class StrategyMouvementBase implements StrategyMouvement{
 
     @Override
-    public boolean onStep(long delta) {
-        boolean limiteEcran = alien.deplacer(delta);
+    public boolean onStep(VaisseauAlien vaisseau, long delta, SpaceInvadersGame game) {
+        boolean limiteEcran = vaisseau.onStep(delta);
         if (!limiteEcran) {
-            alien.setHorizontalSpeed(-alien.getHorizontalSpeed());
-            alien.setVerticalSpeed(alien.getVerticalSpeed() * 1.02);
+            vaisseau.setHorizontalSpeed(-vaisseau.getHorizontalSpeed());
+            vaisseau.setVerticalSpeed(vaisseau.getVerticalSpeed() * 1.02);
+        }
+        if (vaisseau.getY() + vaisseau.getHeight() >= game.getBottomLimit()) {
+            game.alienReachedPlanet();
         }
         return limiteEcran;
     }

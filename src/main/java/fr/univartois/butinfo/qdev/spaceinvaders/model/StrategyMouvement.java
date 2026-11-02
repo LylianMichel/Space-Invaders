@@ -1,9 +1,7 @@
 package fr.univartois.butinfo.qdev.spaceinvaders.model;
 
-import fr.univartois.dpprocessor.designpatterns.strategy.StrategyDesignPattern;
-import fr.univartois.dpprocessor.designpatterns.strategy.StrategyParticipant;
+import fr.univartois.butinfo.qdev.spaceinvaders.model.animated.VaisseauAlien;
 
-@StrategyDesignPattern(strategy = StrategyMouvement.class, participant = StrategyParticipant.INTERFACE)
 public interface StrategyMouvement {
-    public boolean onStep(long delta);
+    public boolean onStep(VaisseauAlien vaisseau, long delta, SpaceInvadersGame game);
 }
