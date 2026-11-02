@@ -1,15 +1,21 @@
 package fr.univartois.butinfo.qdev.spaceinvaders.model;
 
+public class StrategyShootBase implements StrategyShoot {
 import fr.univartois.butinfo.qdev.spaceinvaders.model.animated.VaisseauAlien;
 import fr.univartois.butinfo.qdev.spaceinvaders.view.Sprite;
 
-public class StrategyShootBase extends VaisseauAlien implements StrategyShoot{
-    public StrategyShootBase(SpaceInvadersGame game, double x, double y, Sprite sprite) {
-        super(game, x, y, sprite);
-    }
+public class StrategyShootBase implements StrategyShoot{
+    long maintenant;
+    long lastShot;
 
     @Override
-    public boolean onShoot() {
-        return false;
+    public boolean onShoot(VaisseauAlien vaisseau, SpaceInvadersGame game, Sprite sprite) {
+        maintenant = System.currentTimeMillis();
+
+        if (maintenant - lastShot > 3000) {
+            lastShot=maintenant;
+            game.alienShot(vaisseau);
+        }
+        return true;
     }
 }
