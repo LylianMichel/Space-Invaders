@@ -2,21 +2,18 @@ package fr.univartois.butinfo.qdev.spaceinvaders.model.animated;
 
 import fr.univartois.butinfo.qdev.spaceinvaders.model.*;
 import fr.univartois.butinfo.qdev.spaceinvaders.view.Sprite;
-import fr.univartois.dpprocessor.designpatterns.strategy.StrategyDesignPattern;
-import fr.univartois.dpprocessor.designpatterns.strategy.StrategyParticipant;
 
-@StrategyDesignPattern(strategy = StrategyMouvement.class, participant = StrategyParticipant.CONTEXT)
 public class VaisseauAlien extends AbstractAnimated {
     public StrategyShoot strategyShoot;
-    private StrategyMouvement strategyMouvement;
+    public StrategyMouvement strategyMouvement;
 
 
     public VaisseauAlien(SpaceInvadersGame game, double x, double y, Sprite sprite) {
         super(game, x, y, sprite);
         setHorizontalSpeed(75);
         setVerticalSpeed(1);
-        setStrategyShoot(new StrategyShootBase());
-        setStrategyMouvement(new StrategyMouvementAleatoire(this));
+        setStrategyShoot(new StrategyShootBase(game, x, y, sprite));
+        setStrategyMouvement(new StrategyMouvementBase(game, x, y, sprite));
     }
 
     @Override
