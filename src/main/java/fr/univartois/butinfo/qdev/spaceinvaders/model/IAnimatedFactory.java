@@ -73,6 +73,6 @@ public interface IAnimatedFactory {
      *
      * @return Le tir qui a été créé.
      */
-    IAnimated createShot(int x, int y);
+    IAnimated createShot(int x, int y, int speed);
 
 }

@@ -16,10 +16,12 @@
 
 package fr.univartois.butinfo.qdev.spaceinvaders.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import fr.univartois.butinfo.qdev.spaceinvaders.controller.SpaceInvadersController;
+import fr.univartois.butinfo.qdev.spaceinvaders.model.animated.VaisseauAlien;
 import fr.univartois.butinfo.qdev.spaceinvaders.view.ISpriteStore;
 import fr.univartois.butinfo.qdev.spaceinvaders.view.Sprite;
 import javafx.animation.AnimationTimer;
@@ -101,6 +103,8 @@ public final class SpaceInvadersGame {
      * La liste des objets animés du jeu.
      */
     private final List<IAnimated> animatedObjects = new CopyOnWriteArrayList<>();
+
+    private List<IAnimated> aliens =  new CopyOnWriteArrayList<>();
 
     /**
      * L'animation du jeu, qui permet aux différents objets de se déplacer.
@@ -245,8 +249,8 @@ public final class SpaceInvadersGame {
             // créer l'alien, l'ajouter, incrémenter le compteur
             IAnimated alien = factory.createAlien(alienX, alienY);
             addMoving(alien);
+            aliens.add(alien);
         }
-        // TODO Créer le vaisseau du joueur et les aliens.
     }
 
     /**
@@ -288,7 +292,13 @@ public final class SpaceInvadersGame {
 
         if (maintenant - lastShot > SHOT_TEMPORIZATION) {
             lastShot=maintenant;
-            addMoving(factory.createShot(ship.getX(), ship.getY()-35));
+            addMoving(factory.createShot(ship.getX(), ship.getY() - 35, -300));
+        }
+    }
+
+    public void alienShot(VaisseauAlien alien){
+        if(aliens.getLast() == alien){
+            addMoving(factory.createShot(alien.getX(), alien.getY() + 30, 200));
         }
     }
 

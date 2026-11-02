@@ -7,9 +7,9 @@ import fr.univartois.butinfo.qdev.spaceinvaders.view.Sprite;
 /** Tir qui monte et disparaît aux limites de l'écran ou lors d'une collision. */
 public class Shoot extends AbstractAnimated {
 
-    public Shoot(SpaceInvadersGame game, double x, double y, Sprite sprite) {
+    public Shoot(SpaceInvadersGame game, double x, double y, Sprite sprite, int speed) {
         super(game, x, y, sprite);
-        setVerticalSpeed(-300);
+        setVerticalSpeed(speed);
     }
 
     @Override
@@ -41,7 +41,7 @@ public class Shoot extends AbstractAnimated {
     public void onCollisionWithShot(IAnimated shot) {
         if (!isDestroyed() && !shot.isDestroyed()) {
             game.removeAnimated(shot);
-            game.alienIsDead(shot);
+//            game.alienIsDead(shot);
             game.removeAnimated(this);
         }
     }
