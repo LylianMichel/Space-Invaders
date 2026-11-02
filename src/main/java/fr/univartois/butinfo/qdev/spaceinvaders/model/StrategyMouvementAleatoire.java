@@ -5,39 +5,22 @@ import fr.univartois.butinfo.qdev.spaceinvaders.model.animated.VaisseauAlien;
 import fr.univartois.dpprocessor.designpatterns.strategy.StrategyDesignPattern;
 import fr.univartois.dpprocessor.designpatterns.strategy.StrategyParticipant;
 
-@StrategyDesignPattern(strategy = StrategyMouvement.class, participant = StrategyParticipant.IMPLEMENTATION)
 public class StrategyMouvementAleatoire implements StrategyMouvement {
 
-    private final VaisseauAlien alien;
-    private final Random random = new Random();
-    private long tempsEcoule = 500;
-
-    public StrategyMouvementAleatoire(VaisseauAlien alien) {
-        this.alien = alien;
-    }
+    private Random random = new Random();
 
     @Override
-    public boolean onStep(long delta) {
-        tempsEcoule += delta;
-
-        // Choisir de nouvelles vitesses toutes les 500 ms.
-        if (tempsEcoule >= 500) {
-            tempsEcoule %= 500;
-
-            // Vitesse horizontale comprise entre -100 et 100.
-            alien.setHorizontalSpeed(random.nextInt(201) - 100);
-
-            // Descente à une vitesse comprise entre 10 et 40.
-            alien.setVerticalSpeed(random.nextInt(31) + 10);
+    public boolean onStep(VaisseauAlien vaisseau, long delta, SpaceInvadersGame game) {
+        boolean limiteEcran = vaisseau.onStep(delta);
+        if (!limiteEcran) {
+            vaisseau.setHorizontalSpeed(-vaisseau.getHorizontalSpeed());
+            vaisseau.setVerticalSpeed(vaisseau.getVerticalSpeed() * 1.02);
         }
-
-        boolean deplace = alien.deplacer(delta);
-
-        // Repartir dans l'autre sens si un bord bloque le déplacement.
-        if (!deplace) {
-            alien.setHorizontalSpeed(-alien.getHorizontalSpeed());
+        if (vaisseau.getY() + vaisseau.getHeight() >= game.getBottomLimit()) {
+            game.alienReachedPlanet();
         }
-
-        return deplace;
+        return limiteEcran;
     }
+
+
 }
