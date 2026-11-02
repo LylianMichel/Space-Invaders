@@ -17,6 +17,10 @@ public class VaisseauAlien extends AbstractAnimated {
 
     }
 
+    public boolean onStepBase(long delta) {
+        return super.onStep(delta);
+    }
+
     @Override
     public void onCollisionWith(IAnimated other) {
         if (!isDestroyed() && !other.isDestroyed()) {

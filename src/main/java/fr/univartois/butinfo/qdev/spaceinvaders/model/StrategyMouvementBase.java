@@ -7,7 +7,7 @@ public class StrategyMouvementBase implements StrategyMouvement{
 
     @Override
     public boolean onStep(VaisseauAlien vaisseau, long delta, SpaceInvadersGame game) {
-        boolean limiteEcran = vaisseau.onStep(delta);
+        boolean limiteEcran = vaisseau.onStepBase(delta);
         if (!limiteEcran) {
             vaisseau.setHorizontalSpeed(-vaisseau.getHorizontalSpeed());
             vaisseau.setVerticalSpeed(vaisseau.getVerticalSpeed() * 1.02);

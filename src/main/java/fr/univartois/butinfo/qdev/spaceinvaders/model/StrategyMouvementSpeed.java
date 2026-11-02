@@ -3,32 +3,29 @@ package fr.univartois.butinfo.qdev.spaceinvaders.model;
 import fr.univartois.butinfo.qdev.spaceinvaders.model.animated.VaisseauAlien;
 import fr.univartois.butinfo.qdev.spaceinvaders.view.Sprite;
 
-public class StrategyMouvementSpeed extends VaisseauAlien implements StrategyMouvement {
-    public StrategyMouvementSpeed(SpaceInvadersGame game, double x, double y, Sprite sprite) {
-        super(game, x, y, sprite);
-    }
+public class StrategyMouvementSpeed implements StrategyMouvement {
 
     private boolean attaque = false;
 
-    public void attaquer() {
+    public void attaquer(VaisseauAlien vaisseau) {
         attaque = true;
-        setVerticalSpeed(150);
+        vaisseau.setVerticalSpeed(150);
     }
 
     @Override
-    public boolean onStep(long delta) {
+    public boolean onStep(VaisseauAlien vaisseau, long delta, SpaceInvadersGame game) {
         if (attaque) {
-            setVerticalSpeed(150);
+            vaisseau.setVerticalSpeed(150);
         }
 
-        boolean limiteEcran = super.onStep(delta);
+        boolean limiteEcran = vaisseau.onStepBase(delta);
 
         if (!limiteEcran && !attaque) {
-            setHorizontalSpeed(-getHorizontalSpeed());
-            setVerticalSpeed(getVerticalSpeed() * 1.02);
+            vaisseau.setHorizontalSpeed(-vaisseau.getHorizontalSpeed());
+            vaisseau.setVerticalSpeed(vaisseau.getVerticalSpeed() * 1.02);
         }
 
-        if (getY() + getHeight() >= game.getBottomLimit()) {
+        if (vaisseau.getY() + vaisseau.getHeight() >= game.getBottomLimit()) {
             game.alienReachedPlanet();
         }
 
