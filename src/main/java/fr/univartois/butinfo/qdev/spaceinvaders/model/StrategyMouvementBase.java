@@ -1,22 +1,23 @@
 package fr.univartois.butinfo.qdev.spaceinvaders.model;
 
 import fr.univartois.butinfo.qdev.spaceinvaders.model.animated.VaisseauAlien;
-import fr.univartois.butinfo.qdev.spaceinvaders.view.Sprite;
+import fr.univartois.dpprocessor.designpatterns.strategy.StrategyDesignPattern;
+import fr.univartois.dpprocessor.designpatterns.strategy.StrategyParticipant;
 
-public class StrategyMouvementBase extends VaisseauAlien implements StrategyMouvement{
-    public StrategyMouvementBase(SpaceInvadersGame game, double x, double y, Sprite sprite) {
-        super(game, x, y, sprite);
+@StrategyDesignPattern(strategy = StrategyMouvement.class, participant = StrategyParticipant.IMPLEMENTATION)
+public class StrategyMouvementBase implements StrategyMouvement {
+    private final VaisseauAlien alien;
+
+    public StrategyMouvementBase(VaisseauAlien alien) {
+        this.alien = alien;
     }
 
     @Override
     public boolean onStep(long delta) {
-        boolean limiteEcran = super.onStep(delta);
+        boolean limiteEcran = alien.deplacer(delta);
         if (!limiteEcran) {
-            setHorizontalSpeed(-getHorizontalSpeed());
-            setVerticalSpeed(getVerticalSpeed() * 1.02);
-        }
-        if (getY() + getHeight() >= game.getBottomLimit()) {
-            game.alienReachedPlanet();
+            alien.setHorizontalSpeed(-alien.getHorizontalSpeed());
+            alien.setVerticalSpeed(alien.getVerticalSpeed() * 1.02);
         }
         return limiteEcran;
     }

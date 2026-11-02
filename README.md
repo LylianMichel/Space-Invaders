@@ -271,6 +271,27 @@ class SpaceInvadersController implements ISpaceInvadersController {
 }
 
 SpaceInvadersController o-- "1" SpaceInvadersGame
+
+' Stratégies de déplacement des aliens (TP n°4) '
+interface StrategyMouvement {
+    + onStep(delta : long) : boolean
+}
+
+class VaisseauAlien extends AbstractAnimated {
+    - strategyMouvement : StrategyMouvement
+    + deplacer(delta : long) : boolean
+    + setStrategyMouvement(strategy : StrategyMouvement) : void
+}
+
+class StrategyMouvementBase implements StrategyMouvement
+class StrategyMouvementAleatoire implements StrategyMouvement {
+    - random : Random
+    - tempsEcoule : long
+}
+
+VaisseauAlien o-- "1" StrategyMouvement
+StrategyMouvementBase --> VaisseauAlien
+StrategyMouvementAleatoire --> VaisseauAlien
 ```
 
 ## Tâches réalisées
@@ -288,3 +309,14 @@ SpaceInvadersController o-- "1" SpaceInvadersGame
 | Gestion du tir allié                       | oui        | gautier   |
 | Gestion de la fin de partie                | oui        | gautier   |
 Martin a participe au test du space invaders
+
+### Jalon n°2 - TP n°4
+
+| Fonctionnalité | Patron de conception | Terminée ? | Auteur(s) |
+| --- | --- | --- | --- |
+| Déplacement aléatoire des aliens (question 10) | Stratégie | oui | Lylian |
+
+Chaque alien choisit de nouvelles vitesses horizontale et verticale toutes les
+500 ms. Le temps est accumulé dans `onStep(delta)`, sans `Timer` ni `Timeline`
+supplémentaire. Les positions sont calculées par le déplacement normal à partir
+des vitesses, et les aliens repartent dans l'autre sens lorsqu'un bord les bloque.
