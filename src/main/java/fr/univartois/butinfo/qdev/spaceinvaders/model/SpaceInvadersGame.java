@@ -71,7 +71,7 @@ public final class SpaceInvadersGame {
     /**
      * Le vaisseau du joueur.
      */
-    private IAnimated ship;
+    public IAnimated ship;
 
     /**
      * Le timestamp du dernier tir.
@@ -311,6 +311,7 @@ public final class SpaceInvadersGame {
     public void alienIsDead(IAnimated alien) {
         if (alien.isDestroyed()){
             nbRemainingAliens--;
+            aliens.removeLast();
         }
         if (nbRemainingAliens==0) {
             animation.stop();
