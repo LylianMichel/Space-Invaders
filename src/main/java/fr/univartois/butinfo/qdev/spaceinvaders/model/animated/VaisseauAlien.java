@@ -12,7 +12,7 @@ public class VaisseauAlien extends AbstractAnimated {
         super(game, x, y, sprite);
         setHorizontalSpeed(75);
         setVerticalSpeed(50);
-        setStrategyShoot(new StrategyShootBase(game, x, y, sprite));
+        setStrategyShoot(new StrategyShootBase());
         setStrategyMouvement(new StrategyMouvementBase(game, x, y, sprite));
     }
 
