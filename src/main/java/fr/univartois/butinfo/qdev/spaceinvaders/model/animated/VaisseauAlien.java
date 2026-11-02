@@ -38,11 +38,12 @@ public class VaisseauAlien extends AbstractAnimated {
 
     @Override
     public boolean onStep(long delta) {
+        onShot();
         return strategyMouvement.onStep(this, delta, game);
     }
 
     public boolean onShot(){
-        return strategyShoot.onShoot();
+        return strategyShoot.onShoot(this, game, sprite.get());
     }
 
     public void setStrategyShoot(StrategyShoot strategy){
