@@ -16,7 +16,6 @@
 
 package fr.univartois.butinfo.qdev.spaceinvaders.model;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -27,6 +26,11 @@ import fr.univartois.butinfo.qdev.spaceinvaders.view.Sprite;
 import javafx.animation.AnimationTimer;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import fr.univartois.butinfo.qdev.spaceinvaders.model.animated.IWallProtectector;
+import fr.univartois.butinfo.qdev.spaceinvaders.model.animated.Wall;
+import fr.univartois.butinfo.qdev.spaceinvaders.model.animated.WallBroken;
+import fr.univartois.butinfo.qdev.spaceinvaders.model.animated.WallCracked;
+import fr.univartois.butinfo.qdev.spaceinvaders.model.animated.WallIntact;
 
 /**
  * La classe SpaceInvadersGame permet de gérer une partie du jeu Space-Invaders.
@@ -261,6 +265,14 @@ public final class SpaceInvadersGame {
             IAnimated alien = factory.createAlien(alienX, alienY);
             addMoving(alien);
             aliens.add(alien);
+        }
+
+        // Création des murs de protection
+        int NB_WALLS = 3;
+        for(int i = 0; i <= NB_WALLS; i++){
+            int wallX = i * getWidth() / (NB_WALLS + 1) - spriteStore.getSpriteSize();
+            int wallY = getBottomLimit() - 2 * spriteStore.getSpriteSize();
+            addAnimated(factory.createWall(wallX, wallY));
         }
     }
 
