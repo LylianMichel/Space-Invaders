@@ -5,13 +5,13 @@ import fr.univartois.butinfo.qdev.spaceinvaders.view.Sprite;
 
 public class VaisseauAlien extends AbstractAnimated {
     public StrategyShoot strategyShoot;
-        public StrategyMouvement strategyMouvement;
+    public StrategyMouvement strategyMouvement;
 
 
     public VaisseauAlien(SpaceInvadersGame game, double x, double y, Sprite sprite) {
         super(game, x, y, sprite);
         setHorizontalSpeed(75);
-        setVerticalSpeed(50);
+        setVerticalSpeed(10);
         setStrategyShoot(new StrategyShootBase());
         setStrategyMouvement(new StrategyMouvementBase());
     }
@@ -23,15 +23,15 @@ public class VaisseauAlien extends AbstractAnimated {
     @Override
     public void onCollisionWith(IAnimated other) {
         if (!isDestroyed() && !other.isDestroyed()) {
-            other.onCollisionWithAlien(this);
+            other.onCollisionWithAlien(self);
         }
     }
 
     @Override
     public void onCollisionWithShot(IAnimated shot) {
         if (!isDestroyed() && !shot.isDestroyed()) {
-            game.alienIsDead(this);
             game.removeAnimated(shot);
+            game.alienIsDead(self);   // retire l'alien, met à jour le score
         }
     }
 
@@ -41,8 +41,8 @@ public class VaisseauAlien extends AbstractAnimated {
         return strategyMouvement.onStep(this, delta, game);
     }
 
-    public boolean onShot(){
-        return strategyShoot.onShoot(this, game, sprite.get());
+    public boolean onShot() {
+        return strategyShoot.onShoot(self, game, sprite.get());
     }
 
     public void setStrategyShoot(StrategyShoot strategy){
