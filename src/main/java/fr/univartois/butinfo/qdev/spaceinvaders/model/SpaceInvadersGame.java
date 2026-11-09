@@ -353,8 +353,8 @@ public final class SpaceInvadersGame {
         }
     }
 
-    public void alienShot(VaisseauAlien alien){
-        if(aliens.getLast() == alien){
+    public void alienShot(IAnimated alien) {
+        if (!aliens.isEmpty() && aliens.getLast().equals(alien)) {
             addMoving(factory.createShot(alien.getX(), alien.getY() + 30, 200));
         }
     }
@@ -366,11 +366,10 @@ public final class SpaceInvadersGame {
      * @param alien L'alien qui a été tué.
      */
     public void alienIsDead(IAnimated alien) {
-        if (alien.isDestroyed()){
-            nbRemainingAliens--;
-            aliens.removeLast();
-        }
-        if (nbRemainingAliens==0) {
+        removeAnimated(alien);
+        aliens.remove(alien);
+        nbRemainingAliens--;
+        if (nbRemainingAliens == 0) {
             animation.stop();
             controller.gameOver("You win !");
         }

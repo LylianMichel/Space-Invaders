@@ -8,7 +8,7 @@ public class StrategyShootBase implements StrategyShoot{
     long lastShot;
 
     @Override
-    public boolean onShoot(VaisseauAlien vaisseau, SpaceInvadersGame game, Sprite sprite) {
+    public boolean onShoot(IAnimated vaisseau, SpaceInvadersGame game, Sprite sprite) {
         maintenant = System.currentTimeMillis();
 
         if (maintenant - lastShot > 3000) {

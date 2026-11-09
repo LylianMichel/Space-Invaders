@@ -15,7 +15,7 @@ public class StrategyShootAleatoire implements StrategyShoot{
     }
 
     @Override
-    public boolean onShoot(VaisseauAlien vaisseau, SpaceInvadersGame game, Sprite sprite) {
+    public boolean onShoot(IAnimated vaisseau, SpaceInvadersGame game, Sprite sprite) {
         long now = System.currentTimeMillis();
 
         if(now - lastshot > delay){
