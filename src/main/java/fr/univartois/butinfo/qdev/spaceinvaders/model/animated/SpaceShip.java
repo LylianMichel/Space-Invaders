@@ -1,9 +1,6 @@
 package fr.univartois.butinfo.qdev.spaceinvaders.model.animated;
 
-import fr.univartois.butinfo.qdev.spaceinvaders.model.IAnimated;
-import fr.univartois.butinfo.qdev.spaceinvaders.model.IFrameHittable;
-import fr.univartois.butinfo.qdev.spaceinvaders.model.IIFrameState;
-import fr.univartois.butinfo.qdev.spaceinvaders.model.SpaceInvadersGame;
+import fr.univartois.butinfo.qdev.spaceinvaders.model.*;
 import fr.univartois.butinfo.qdev.spaceinvaders.view.Sprite;
 
 public class SpaceShip extends AbstractAnimated {
@@ -41,5 +38,17 @@ public class SpaceShip extends AbstractAnimated {
                 game.reducePlayerLife();
             }
         }
+    }
+
+    @Override
+    public void onCollisionWithBonus(Bonus bonus) {
+        if (!isDestroyed() && !bonus.isDestroyed()) {
+            bonus.bonusEffect(this);
+            game.removeAnimated(bonus);
+        }
+    }
+
+    public void gainInvulnerability() {
+        iFrameState = new IFrameNotHittable(5000);
     }
 }

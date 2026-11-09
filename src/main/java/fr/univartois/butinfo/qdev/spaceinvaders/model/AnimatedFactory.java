@@ -2,12 +2,14 @@ package fr.univartois.butinfo.qdev.spaceinvaders.model;
 
 import fr.univartois.butinfo.qdev.spaceinvaders.model.animated.*;
 import fr.univartois.butinfo.qdev.spaceinvaders.view.ISpriteStore;
-import fr.univartois.butinfo.qdev.spaceinvaders.view.Sprite;
+
+import java.util.Random;
 
 public  class AnimatedFactory implements IAnimatedFactory {
 
     private ISpriteStore newspriteStore;
     private SpaceInvadersGame newgame;
+    private static final Random rand = new Random();
 
     @Override
     public void setSpriteStore(ISpriteStore spriteStore) {
@@ -31,6 +33,15 @@ public  class AnimatedFactory implements IAnimatedFactory {
     @Override
     public IAnimated createShot(int x, int y, int speed) {
         return new Shoot(newgame , x , y , newspriteStore.getSprite("shot"), speed);
+
+    }
+
+    @Override
+    public IAnimated createBonus(int x, int y){
+            if(rand.nextBoolean()){
+                return new BonusLife(newgame , x , y , newspriteStore.getSprite("ufo"));
+            }
+            return new BonusInvulnerability(newgame , x , y , newspriteStore.getSprite("ufo"));
 
     }
 
