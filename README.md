@@ -334,16 +334,16 @@ Martin a participe au test du space invaders
 
 | Fonctionnalité                             | Patron de Conception ? | Terminée ? | Auteur(s)                                     |
 | ------------------------------------------ | ---------------------- | ---------- | --------------------------------------------- |
-| Gestion des points de vie des aliens       |                        |            |                                               |
-| Gestion des points de vie du joueur        |                        |            |                                               |
-| Gestion de l'invulnérabilité               |                        |            |                                               |
-| Implémentation de la vulnérabilité         |                        |            |                                               |
-| Implémentation de l'invulnérabilité        |                        |            |                                               |
-| Gestion des bonus                          |                        |            |                                               |
-| Implémentation du bonus de vie             |                        |            |                                               |
-| Implémentation du bonus d'invulnérabilité  |                        |            |                                               |
-| Gestion des murs de protection             |                        |            |                                               |
-| Implémentation des dégradations des murs   |                        |            |                                               |
+| Gestion des points de vie des aliens       |    Decorateur                    |            |  Alice                                             |
+| Gestion des points de vie du joueur        |    Decorateur                    |            |  Alice                                             |
+| Gestion de l'invulnérabilité               |    Etat                    |  oui          |  Martin                                             |
+| Implémentation de la vulnérabilité         |   Etat                     |  oui          |  Martin                                             |
+| Implémentation de l'invulnérabilité        |    Etat                    | oui           |   Martin                                            |
+| Gestion des bonus                          |    Decorateur                    | oui           |   Gautier                                            |
+| Implémentation du bonus de vie             |    Decorateur                    |  oui          |     Gautier                                          |
+| Implémentation du bonus d'invulnérabilité  |    Decorateur                    |   oui         |     Gautier                                          |
+| Gestion des murs de protection             |   Etat                     |   oui         |     Maxence                                          |
+| Implémentation des dégradations des murs   |   Etat                    |   oui         |   Maxence                                            |
 
 ### Jalon n°4 - TP n°6
 
