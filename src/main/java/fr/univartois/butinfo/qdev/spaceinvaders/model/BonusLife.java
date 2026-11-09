@@ -17,6 +17,6 @@ public class BonusLife extends Bonus{
 
     @Override
     public void bonusEffect(){
-
+        game.augmentPlayerLife();
     }
 }

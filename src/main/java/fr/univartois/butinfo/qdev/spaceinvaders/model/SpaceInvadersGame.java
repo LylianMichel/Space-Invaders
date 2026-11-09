@@ -330,6 +330,13 @@ public final class SpaceInvadersGame {
     }
 
     /**
+     * Augmente la vie du joueur en cas de bonus.
+     */
+    public void augmentPlayerLife() {
+        life.set(life.get()+1);
+    }
+
+    /**
      * Termine la partie lorsque le joueur est tué.
      */
     public void playerIsDead() {
