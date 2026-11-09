@@ -327,8 +327,8 @@ Martin a participe au test du space invaders
 
 | Fonctionnalité                             | Patron de Conception ? | Terminée ? | Auteur(s)                                     |
 | ------------------------------------------ | ---------------------- | ---------- | --------------------------------------------- |
-| Variantes de déplacement pour les aliens   |                        |            |                                               |
-| Variantes de tir pour les aliens           |                        |            |                                               |
+| Variantes de déplacement pour les aliens   |   Strategy                     |  oui          |  Lylian Gautier                                             |
+| Variantes de tir pour les aliens           |   Strategy                     |  oui          |  Alice Maxence                                             |
 
 ### Jalon n°3 - TP n°5
 
