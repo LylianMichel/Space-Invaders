@@ -334,8 +334,8 @@ Martin a participe au test du space invaders
 
 | Fonctionnalité                             | Patron de Conception ? | Terminée ? | Auteur(s)                                     |
 | ------------------------------------------ | ---------------------- | ---------- | --------------------------------------------- |
-| Gestion des points de vie des aliens       |    Decorateur                    |            |  Alice                                             |
-| Gestion des points de vie du joueur        |    Decorateur                    |            |  Alice                                             |
+| Gestion des points de vie des aliens       |    Decorateur                    | oui           |  Alice                                             |
+| Gestion des points de vie du joueur        |    Decorateur                    | oui          |  Alice                                             |
 | Gestion de l'invulnérabilité               |    Etat                    |  oui          |  Martin                                             |
 | Implémentation de la vulnérabilité         |   Etat                     |  oui          |  Martin                                             |
 | Implémentation de l'invulnérabilité        |    Etat                    | oui           |   Martin                                            |
