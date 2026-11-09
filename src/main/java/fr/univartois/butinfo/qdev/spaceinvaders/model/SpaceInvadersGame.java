@@ -17,6 +17,7 @@
 package fr.univartois.butinfo.qdev.spaceinvaders.model;
 
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import fr.univartois.butinfo.qdev.spaceinvaders.controller.SpaceInvadersController;
@@ -41,6 +42,8 @@ import fr.univartois.butinfo.qdev.spaceinvaders.model.animated.WallIntact;
  */
 public final class SpaceInvadersGame {
 
+
+    private static final Random random = new Random();
     /**
      * La vitesse du vaisseau du joueur lorsqu'il se déplace (en pixels/s).
      */
@@ -308,7 +311,12 @@ public final class SpaceInvadersGame {
      * @see #onStep(long)
      */
     private void dropBonus() {
-        // TODO Complétez cette méthode pour faire apparaître un bonus.
+        long maintenant = System.currentTimeMillis();
+
+        if (maintenant - lastBonusDrop > 3000) {
+            int x = random.nextInt(getLeftLimit(), getRightLimit() - spriteStore.getSpriteSize());
+            addMoving(factory.createBonus(x, getTopLimit()));
+        }
     }
 
     /**

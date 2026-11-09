@@ -1,5 +1,6 @@
 package fr.univartois.butinfo.qdev.spaceinvaders.model;
 
+import fr.univartois.butinfo.qdev.spaceinvaders.model.animated.SpaceShip;
 import fr.univartois.butinfo.qdev.spaceinvaders.view.Sprite;
 
 public class BonusLife extends Bonus{
@@ -16,7 +17,7 @@ public class BonusLife extends Bonus{
     }
 
     @Override
-    public void bonusEffect(){
+    public void bonusEffect(SpaceShip ship){
         game.augmentPlayerLife();
     }
 }

@@ -21,13 +21,21 @@ public abstract class Bonus extends AbstractAnimated {
     }
 
     @Override
-    public void onCollisionWith(IAnimated other){
-        if (other instanceof SpaceShip) {
-            bonusEffect();
-            game.removeAnimated(this);
+    public void onCollisionWith(IAnimated other) {
+        if (!isDestroyed() && !other.isDestroyed()) {
+            other.onCollisionWithBonus(this);
         }
     }
 
+    @Override
+    public boolean onStep(long delta) {
+        boolean moved = super.onStep(delta);
+        if (!moved && !isDestroyed()) {
+            game.removeAnimated(this);
+        }
+        return moved;
+    }
 
-    public abstract void bonusEffect();
+
+    public abstract void bonusEffect(SpaceShip ship);
 }

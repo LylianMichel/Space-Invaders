@@ -75,6 +75,9 @@ public interface IAnimatedFactory {
      */
     IAnimated createShot(int x, int y, int speed);
 
+
+    IAnimated createBonus(int x, int y);
+
     /**
      * Crée un nouvel objet animé représentant un mur de protection.
      *
