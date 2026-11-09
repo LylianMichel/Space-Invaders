@@ -6,6 +6,8 @@ import fr.univartois.butinfo.qdev.spaceinvaders.view.Sprite;
 public class SpaceShip extends AbstractAnimated {
 
     private IIFrameState iFrameState = new IFrameHittable();
+    @Override
+    public boolean canBeHit() { return iFrameState.isHittable(); }
 
     public SpaceShip(SpaceInvadersGame game, double xPosition, double yPosition, Sprite sprite) {
         super(game, xPosition, yPosition, sprite);
@@ -29,15 +31,12 @@ public class SpaceShip extends AbstractAnimated {
         }
     }
 
+    public void onHit() { iFrameState = iFrameState.onHit(); }
+
     @Override
     public void onCollisionWithShot(IAnimated shot) {
-        if (!isDestroyed() && !shot.isDestroyed()) {
-            game.removeAnimated(shot);
-            if (iFrameState.isHittable()) {
-                iFrameState = iFrameState.onHit();
-                game.reducePlayerLife();
-            }
-        }
+        game.removeAnimated(shot);
+        game.playerIsDead();
     }
 
     @Override

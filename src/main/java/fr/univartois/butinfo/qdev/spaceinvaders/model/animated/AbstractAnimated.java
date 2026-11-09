@@ -84,6 +84,11 @@ public abstract class AbstractAnimated implements IAnimated {
      * Elle est liée à celle du {@link #sprite} courant.
      */
     protected final ObjectProperty<Image> image;
+    public void onHit() { /* rien par défaut */ }
+
+    protected IAnimated self = this;
+    public void setSelf(IAnimated self) { this.self = self; }
+    public boolean canBeHit() { return true; }
 
     /**
      * Crée une nouvelle instance de AbstractAnimated.

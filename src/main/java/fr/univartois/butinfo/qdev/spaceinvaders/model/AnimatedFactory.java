@@ -23,11 +23,12 @@ public  class AnimatedFactory implements IAnimatedFactory {
 
     @Override
     public IAnimated createAlien(int x, int y) {
-        return new VaisseauAlien(newgame , x , y , newspriteStore.getSprite("alien"));}
+        return new LifeDecorator(new VaisseauAlien(newgame ,x , y , newspriteStore.getSprite("alien")), newgame, 2);
+    }
 
     @Override
     public IAnimated createShip(int x, int y) {
-        return new SpaceShip(newgame ,x , y , newspriteStore.getSprite("ship"));
+        return new LifeDecorator(new SpaceShip(newgame ,x , y , newspriteStore.getSprite("ship")), newgame, 3);
     }
 
     @Override

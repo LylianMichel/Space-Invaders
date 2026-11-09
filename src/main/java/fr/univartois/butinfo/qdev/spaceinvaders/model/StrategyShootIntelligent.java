@@ -11,7 +11,7 @@ public class StrategyShootIntelligent implements StrategyShoot{
     long lastShot;
 
     @Override
-    public boolean onShoot(VaisseauAlien vaisseau, SpaceInvadersGame game, Sprite sprite) {
+    public boolean onShoot(IAnimated vaisseau, SpaceInvadersGame game, Sprite sprite) {
         maintenant = System.currentTimeMillis();
 
         if (maintenant - lastShot > 2000 && Math.abs(vaisseau.getX() - game.ship.getX())<ecart) {

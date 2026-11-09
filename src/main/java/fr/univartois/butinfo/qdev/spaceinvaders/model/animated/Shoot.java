@@ -30,11 +30,7 @@ public class Shoot extends AbstractAnimated {
 
     @Override
     public void onCollisionWithAlien(IAnimated alien) {
-        if (!isDestroyed() && !alien.isDestroyed()) {
-            game.removeAnimated(alien);
-            game.alienIsDead(alien);
-            game.removeAnimated(this);
-        }
+        // Géré côté alien (onCollisionWithShot), via le LifeDecorator.
     }
 
     @Override
