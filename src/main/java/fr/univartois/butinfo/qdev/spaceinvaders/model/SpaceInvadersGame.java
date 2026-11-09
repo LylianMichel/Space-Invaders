@@ -16,7 +16,6 @@
 
 package fr.univartois.butinfo.qdev.spaceinvaders.model;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -27,6 +26,11 @@ import fr.univartois.butinfo.qdev.spaceinvaders.view.Sprite;
 import javafx.animation.AnimationTimer;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import fr.univartois.butinfo.qdev.spaceinvaders.model.animated.IWallProtectector;
+import fr.univartois.butinfo.qdev.spaceinvaders.model.animated.Wall;
+import fr.univartois.butinfo.qdev.spaceinvaders.model.animated.WallBroken;
+import fr.univartois.butinfo.qdev.spaceinvaders.model.animated.WallCracked;
+import fr.univartois.butinfo.qdev.spaceinvaders.model.animated.WallIntact;
 
 /**
  * La classe SpaceInvadersGame permet de gérer une partie du jeu Space-Invaders.
@@ -47,6 +51,11 @@ public final class SpaceInvadersGame {
      * millisecondes).
      */
     private static final long SHOT_TEMPORIZATION = 500;
+
+    /**
+     * La temporisation contraignant le délai entre deux apparitions de bonus.
+     */
+    private static final long BONUS_TEMPORIZATION = 20000;
 
     /**
      * La largeur sur laquelle les objets du jeu peuvent se déplacer (en pixels).
@@ -72,6 +81,12 @@ public final class SpaceInvadersGame {
      * Le vaisseau du joueur.
      */
     public IAnimated ship;
+
+    /**
+     * Le délai depuis la dernière apparition d'un bonus.
+     * Lorsque ce délai atteint 20 secondes, un nouveau bonus peut apparaître.
+     */
+    private long lastBonusDrop = 0;
 
     /**
      * Le timestamp du dernier tir.
@@ -109,7 +124,7 @@ public final class SpaceInvadersGame {
     /**
      * L'animation du jeu, qui permet aux différents objets de se déplacer.
      */
-    private final AnimationTimer animation = new GameAnimation(movingObjects, animatedObjects);
+    private final AnimationTimer animation = new GameAnimation(this, movingObjects, animatedObjects);
 
     /**
      * Le contrôleur du jeu.
@@ -251,6 +266,14 @@ public final class SpaceInvadersGame {
             addMoving(alien);
             aliens.add(alien);
         }
+
+        // Création des murs de protection
+        int NB_WALLS = 3;
+        for(int i = 0; i <= NB_WALLS; i++){
+            int wallX = i * getWidth() / (NB_WALLS + 1) - spriteStore.getSpriteSize();
+            int wallY = getBottomLimit() - 2 * spriteStore.getSpriteSize();
+            addAnimated(factory.createWall(wallX, wallY));
+        }
     }
 
     /**
@@ -260,6 +283,32 @@ public final class SpaceInvadersGame {
         life.set(3);
         score.set(0);
         nbRemainingAliens = 0;
+    }
+
+    /**
+     * Modifie l'état du jeu après un certain délai.
+     *
+     * @param timeDelta Le temps écoulé depuis la dernière mise à jour du jeu
+     *        (en millisecondes).
+     */
+    public void onStep(long timeDelta) {
+        // On regarde s'il est temps de déposer un bonus.
+        lastBonusDrop += timeDelta;
+        if (lastBonusDrop >= BONUS_TEMPORIZATION) {
+            dropBonus();
+            lastBonusDrop = 0;
+        }
+    }
+
+    /**
+     * Fait apparaître aléatoirement un bonus.
+     * Cette méthode est appelée régulièrement, avec un délai de
+     * {@link #BONUS_TEMPORIZATION} entre chaque appel.
+     *
+     * @see #onStep(long)
+     */
+    private void dropBonus() {
+        // TODO Complétez cette méthode pour faire apparaître un bonus.
     }
 
     /**

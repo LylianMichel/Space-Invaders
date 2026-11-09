@@ -31,6 +31,11 @@ import javafx.animation.AnimationTimer;
 final class GameAnimation extends AnimationTimer {
 
     /**
+     * La partie en cours.
+     */
+    private final SpaceInvadersGame game;
+
+    /**
      * La liste des objets mobiles dans le jeu.
      */
     private final List<IAnimated> movingObjects;
@@ -48,10 +53,12 @@ final class GameAnimation extends AnimationTimer {
     /**
      * Crée une nouvelle instance de GameAnimation.
      *
+     * @param game La partie en cours.
      * @param movingObjects La liste des objets mobiles dans le jeu.
      * @param animatedObjects La liste des objets animés dans le jeu.
      */
-    public GameAnimation(List<IAnimated> movingObjects, List<IAnimated> animatedObjects) {
+    public GameAnimation(SpaceInvadersGame game, List<IAnimated> movingObjects, List<IAnimated> animatedObjects) {
+        this.game = game;
         this.movingObjects = movingObjects;
         this.animatedObjects = animatedObjects;
     }
@@ -84,7 +91,8 @@ final class GameAnimation extends AnimationTimer {
         long delta = (now - previousTimestamp) / 1000000;
         previousTimestamp = now;
 
-        // On vérifie l'état actuel des objets.
+        // On vérifie l'état actuel des objets pour les mettre à jour.
+        game.onStep(delta);
         updateObjects(delta);
         checkCollisions();
     }

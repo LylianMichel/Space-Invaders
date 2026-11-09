@@ -1,8 +1,6 @@
 package fr.univartois.butinfo.qdev.spaceinvaders.model;
 
-import fr.univartois.butinfo.qdev.spaceinvaders.model.animated.Shoot;
-import fr.univartois.butinfo.qdev.spaceinvaders.model.animated.SpaceShip;
-import fr.univartois.butinfo.qdev.spaceinvaders.model.animated.VaisseauAlien;
+import fr.univartois.butinfo.qdev.spaceinvaders.model.animated.*;
 import fr.univartois.butinfo.qdev.spaceinvaders.view.ISpriteStore;
 import fr.univartois.butinfo.qdev.spaceinvaders.view.Sprite;
 
@@ -34,6 +32,13 @@ public  class AnimatedFactory implements IAnimatedFactory {
     public IAnimated createShot(int x, int y, int speed) {
         return new Shoot(newgame , x , y , newspriteStore.getSprite("shot"), speed);
 
+    }
+
+    public IAnimated createWall(int x, int y) {
+        IWallProtectector broken = new WallBroken();
+        IWallProtectector cracked = new WallCracked(broken, newspriteStore.getSprite("empty-bricks"));
+        IWallProtectector intact = new WallIntact(cracked, newspriteStore.getSprite("cracked-bricks"));
+        return new Wall(newgame, x, y, newspriteStore.getSprite("bricks"), intact);
     }
 }
 
