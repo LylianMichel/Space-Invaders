@@ -313,7 +313,7 @@ public final class SpaceInvadersGame {
     private void dropBonus() {
         long maintenant = System.currentTimeMillis();
 
-        if (maintenant - lastBonusDrop > 3000) {
+        if (maintenant - lastBonusDrop > BONUS_TEMPORIZATION) {
             int x = random.nextInt(getLeftLimit(), getRightLimit() - spriteStore.getSpriteSize());
             addMoving(factory.createBonus(x, getTopLimit()));
         }
