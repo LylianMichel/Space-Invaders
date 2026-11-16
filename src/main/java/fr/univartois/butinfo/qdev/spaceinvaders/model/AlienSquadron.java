@@ -65,6 +65,11 @@ public class AlienSquadron implements IAliensSquadron, IAnimated {
             alien.setVerticalSpeed(20000);
         }
     }
+    public void reverseHorizontally() {
+        for (IAnimated alien : aliens) {
+            alien.setHorizontalSpeed(-alien.getHorizontalSpeed());
+        }
+    }
 
     // ------------------------------------------------------------------
     // Boîte englobante de l'escadron

@@ -132,6 +132,12 @@ public final class SpaceInvadersGame {
     private static final int NIVEAU_MAX = 3;
 
     /**
+     * L'escadron regroupant les aliens (composite), qui permet de les déplacer
+     * ensemble et de gérer leurs collisions.
+     */
+    private AlienSquadron alienSquadron;
+
+    /**
      * Crée une nouvelle instance de SpaceInvadersGame.
      *
      * @param width La largeur sur laquelle les objets du jeu peuvent se déplacer
@@ -144,7 +150,7 @@ public final class SpaceInvadersGame {
      *        objets du jeu.
      */
     public SpaceInvadersGame(int width, int height, ISpriteStore spriteStore,
-            IAnimatedFactory factory) {
+                             IAnimatedFactory factory) {
         this.width = width;
         this.height = height;
         this.spriteStore = spriteStore;
@@ -261,6 +267,7 @@ public final class SpaceInvadersGame {
     private void createAnimated() {
         // On commence par enlever tous les objets animés encore présents.
         clearAnimated();
+        alienSquadron = new AlienSquadron();
 
         // Création du vaisseau
         int x = (getWidth() - spriteStore.getSpriteSize())/2;
@@ -270,16 +277,22 @@ public final class SpaceInvadersGame {
         addMoving(ship);
 
         // Création des vaisseaux aliens
-        int NB_ALIENS = 3;
-        for(int i = 0; i < NB_ALIENS; i++){
-            nbRemainingAliens ++;
-            int alienX = (getWidth() - spriteStore.getSpriteSize())/2;
-            int alienY = getTopLimit() + i * spriteStore.getSpriteSize();
-            // créer l'alien, l'ajouter, incrémenter le compteur
-            IAnimated alien = factory.createAlien(alienX, alienY);
-            addMoving(alien);
-            aliens.add(alien);
+        int NB_ALIENS = 5;
+        for(int i = 0; i < 5; i++){
+            for (int j = 0; j < 3; j++) {
+                nbRemainingAliens ++;
+                int alienX = (getWidth() - spriteStore.getSpriteSize())/2 + j * spriteStore.getSpriteSize();
+                int alienY = getTopLimit() + i * spriteStore.getSpriteSize();
+
+                // créer l'alien, l'ajouter, incrémenter le compteur
+                IAnimated alien = factory.createAlien(alienX, alienY);
+                aliens.add(alien);
+                controller.addAnimated(alien);
+                alienSquadron.addAlien(alien);
+            }
         }
+        animatedObjects.add(alienSquadron);
+
 
         // Création des murs de protection
         int NB_WALLS = 3;
@@ -379,6 +392,7 @@ public final class SpaceInvadersGame {
     public void alienIsDead(IAnimated alien) {
         removeAnimated(alien);
         aliens.remove(alien);
+        alienSquadron.removeAlien(alien);
         nbRemainingAliens--;
         if (nbRemainingAliens == 0) {
             if (niveau < NIVEAU_MAX) {
@@ -423,6 +437,10 @@ public final class SpaceInvadersGame {
     public void alienReachedPlanet() {
         animation.stop();
         controller.gameOver("Les aliens ont envahi la planète !");
+    }
+
+    public void reverseAliens() {
+        alienSquadron.reverseHorizontally();
     }
 
     /**

@@ -11,7 +11,17 @@ public  class AnimatedFactory implements IAnimatedFactory {
     protected ISpriteStore newspriteStore;
     protected SpaceInvadersGame newgame;
     private final StrategyShootComposite sharedShoot = new StrategyShootComposite(List.of(new StrategyShootBase(), new StrategyShootAleatoire(), new StrategyShootIntelligent()));
+    // Une seule stratégie de mouvement pour tous les aliens : le changement de variante
+    // est décidé une seule fois et s'applique à tout le monde en même temps.
+    private final StrategyMouvement sharedMouvement = creerMouvementPartage();
     private static final Random rand = new Random();
+
+    private static StrategyMouvement creerMouvementPartage() {
+        MouvementCompositeAleatoire mouvement = new MouvementCompositeAleatoire();
+        mouvement.add(new StrategyMouvementBase());
+        mouvement.add(new StrategyMouvementAleatoire());
+        return mouvement;
+    }
 
     @Override
     public void setSpriteStore(ISpriteStore spriteStore) {
@@ -26,12 +36,7 @@ public  class AnimatedFactory implements IAnimatedFactory {
     @Override
     public IAnimated createAlien(int x, int y) {
         VaisseauAlien alien= new VaisseauAlien(newgame ,x , y , newspriteStore.getSprite("alien"));
-
-
-        MouvementCompositeAleatoire mouvement=new MouvementCompositeAleatoire();
-        mouvement.add(new StrategyMouvementBase());
-        mouvement.add(new StrategyMouvementAleatoire());
-        alien.setStrategyMouvement(mouvement);
+        alien.setStrategyMouvement(sharedMouvement);
 
         return new LifeDecorator(alien, newgame, 2);
     }
@@ -50,10 +55,10 @@ public  class AnimatedFactory implements IAnimatedFactory {
 
     @Override
     public IAnimated createBonus(int x, int y){
-            if(rand.nextBoolean()){
-                return new BonusLife(newgame , x , y , newspriteStore.getSprite("ufo"));
-            }
-            return new BonusInvulnerability(newgame , x , y , newspriteStore.getSprite("ufo"));
+        if(rand.nextBoolean()){
+            return new BonusLife(newgame , x , y , newspriteStore.getSprite("ufo"));
+        }
+        return new BonusInvulnerability(newgame , x , y , newspriteStore.getSprite("ufo"));
 
     }
 
@@ -64,5 +69,3 @@ public  class AnimatedFactory implements IAnimatedFactory {
         return new Wall(newgame, x, y, newspriteStore.getSprite("bricks"), intact);
     }
 }
-
-
