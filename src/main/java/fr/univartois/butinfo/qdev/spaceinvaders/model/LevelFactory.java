@@ -19,12 +19,15 @@ public class LevelFactory extends AnimatedFactory{
             case 1:
                 alien.setStrategyMouvement(new StrategyMouvementBase());
                 alien.setStrategyShoot(new StrategyShootBase());
+                break;
             case 2:
                 alien.setStrategyMouvement(new StrategyMouvementSpeed());
                 alien.setStrategyShoot(new StrategyShootIntelligent());
+                break;
             case 3:
                 alien.setStrategyMouvement(new StrategyMouvementAleatoire());
                 alien.setStrategyShoot(new StrategyShootAleatoire());
+                break;
         }
         return new LifeDecorator(alien,newgame,2);
     }
