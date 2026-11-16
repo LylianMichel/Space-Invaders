@@ -17,6 +17,10 @@ Vous pouvez retrouver ci-dessous les liens vers les sujets de TP vous guidant
 dans le développement de votre projet :
 
 - [Lancement du projet *Space-Invaders*](https://gitlab.univ-artois.fr/enseignements-rwa/modules/but-2/r3-04/tp/-/tree/main/tp/TP03)
+- [Des patrons de conception dans *Space-Invaders* (1)](https://gitlab.univ-artois.fr/enseignements-rwa/modules/but-2/r3-04/tp/-/tree/main/tp/TP04)
+- [Des patrons de conception dans *Space-Invaders* (2)](https://gitlab.univ-artois.fr/enseignements-rwa/modules/but-2/r3-04/tp/-/tree/main/tp/TP05)
+- [Des patrons de conception dans *Space-Invaders* (3)](https://gitlab.univ-artois.fr/enseignements-rwa/modules/but-2/r3-04/tp/-/tree/main/tp/TP06)
+- [Bonnes pratiques de la POO dans le projet *Space-Invaders*](https://gitlab.univ-artois.fr/enseignements-rwa/modules/but-2/r3-04/tp/-/tree/main/tp/TP07)
 
 ## Diagramme de classes
 
@@ -130,6 +134,9 @@ interface IAnimated {
     + {abstract} setY(yPosition : double) : void
     + {abstract} getY() : int
     + {abstract} yProperty() : DoubleProperty
+    + {abstract} setRotate(double rotate) : void
+    + {abstract} getRotate() : double
+    + {abstract} rotateProperty() : DoubleProperty
     + {abstract} setHorizontalSpeed(speed : double) : void
     + {abstract} getHorizontalSpeed() : double
     + {abstract} setVerticalSpeed(speed : double) : void
@@ -183,14 +190,13 @@ class GameAnimation {
 }
 
 SpaceInvadersGame o-- "1" ISpriteStore
-SpaceInvadersGame o-- "1" GameMap
+SpaceInvadersGame *-- "1" IAnimatedFactory
 SpaceInvadersGame o-- "*" IAnimated
-SpaceInvadersGame o-- "1" GameAnimation
-SpaceInvadersGame o-- "1" ISpaceInvadersController
+SpaceInvadersGame *-- "1" GameAnimation
+SpaceInvadersGame *-- "1" ISpaceInvadersController
 
 IAnimatedFactory o-- "1" ISpriteStore
-IAnimatedFactory o-- "1" SpaceInvadersGame
-
+IAnimatedFactory *-- "1" SpaceInvadersGame
 IAnimatedFactory --> IAnimated : << crée >>
 
 GameAnimation o-- "*" IAnimated
@@ -200,10 +206,10 @@ GameAnimation o-- "*" IAnimated
 ' --------------------------------- '
 
 abstract class AbstractAnimated implements IAnimated {
-    - {static} MARGIN : int
     # game : SpaceInvadersGame
     # xPosition : DoubleProperty
     # yPosition : DoubleProperty
+    # rotated : DoubleProperty
     # horizontalSpeed : double
     # verticalSpeed : double
     # destroyed : BooleanProperty
@@ -219,6 +225,9 @@ abstract class AbstractAnimated implements IAnimated {
     + setY(yPosition : double) : void
     + getY() : int
     + yProperty() : DoubleProperty
+    + setRotate(double rotate) : void
+    + getRotate() : double
+    + rotateProperty() : DoubleProperty
     + setHorizontalSpeed(speed : double) : void
     + getHorizontalSpeed() : double
     + setVerticalSpeed(speed : double) : void
@@ -250,6 +259,7 @@ AbstractAnimated o-- "1" Sprite
 
 class SpaceInvadersController implements ISpaceInvadersController {
     - game : SpaceInvadersGame
+    - spriteStore : ISpriteStore
     - stage : Stage
     - backgroundPane : GridPane
     - animatedPane : Pane
@@ -271,6 +281,29 @@ class SpaceInvadersController implements ISpaceInvadersController {
 }
 
 SpaceInvadersController o-- "1" SpaceInvadersGame
+
+' Stratégies de déplacement des aliens (TP n°4) '
+interface StrategyMouvement {
+    + onStep(delta : long) : boolean
+}
+
+class VaisseauAlien extends AbstractAnimated {
+    - strategyMouvement : StrategyMouvement
+    + deplacer(delta : long) : boolean
+    + setStrategyMouvement(strategy : StrategyMouvement) : void
+}
+
+class StrategyMouvementBase implements StrategyMouvement
+class StrategyMouvementAleatoire implements StrategyMouvement {
+    - random : Random
+    - tempsEcoule : long
+}
+
+VaisseauAlien o-- "1" StrategyMouvement
+StrategyMouvementBase --> VaisseauAlien
+StrategyMouvementAleatoire --> VaisseauAlien
+SpaceInvadersController *-- "1" SpaceInvadersGame
+SpaceInvadersController o-- "1" ISpriteStore
 ```
 
 ## Tâches réalisées
@@ -288,3 +321,46 @@ SpaceInvadersController o-- "1" SpaceInvadersGame
 | Gestion du tir allié                       | oui        | gautier   |
 | Gestion de la fin de partie                | oui        | gautier   |
 Martin a participe au test du space invaders
+
+
+### Jalon n°2 - TP n°4
+
+| Fonctionnalité                             | Patron de Conception ? | Terminée ? | Auteur(s)                                     |
+| ------------------------------------------ | ---------------------- | ---------- | --------------------------------------------- |
+| Variantes de déplacement pour les aliens   |   Strategy                     |  oui          |  Lylian Gautier                                             |
+| Variantes de tir pour les aliens           |   Strategy                     |  oui          |  Alice Maxence                                             |
+
+### Jalon n°3 - TP n°5
+
+| Fonctionnalité                             | Patron de Conception ? | Terminée ? | Auteur(s)                                     |
+| ------------------------------------------ | ---------------------- | ---------- | --------------------------------------------- |
+| Gestion des points de vie des aliens       |    Decorateur                    | oui           |  Alice                                             |
+| Gestion des points de vie du joueur        |    Decorateur                    | oui          |  Alice                                             |
+| Gestion de l'invulnérabilité               |    Etat                    |  oui          |  Martin                                             |
+| Implémentation de la vulnérabilité         |   Etat                     |  oui          |  Martin                                             |
+| Implémentation de l'invulnérabilité        |    Etat                    | oui           |   Martin                                            |
+| Gestion des bonus                          |    Decorateur                    | oui           |   Gautier                                            |
+| Implémentation du bonus de vie             |    Decorateur                    |  oui          |     Gautier                                          |
+| Implémentation du bonus d'invulnérabilité  |    Decorateur                    |   oui         |     Gautier                                          |
+| Gestion des murs de protection             |   Etat                     |   oui         |     Maxence                                          |
+| Implémentation des dégradations des murs   |   Etat                    |   oui         |   Maxence                                            |
+
+### Jalon n°4 - TP n°6
+
+| Fonctionnalité                                         | Patron de Conception ? | Terminée ? | Auteur(s)                                     |
+| ------------------------------------------------------ |------------------------| ---------- | --------------------------------------------- |
+| Définition d'un seul `SpriteStore`                     |                        |            |                                               |
+| Définition d'une seule instance quand c'est possible   |                        |            |                                               |
+| Implémentation du déplacement des aliens en escadrille |                        |            |                                               |
+| Implémentation du changement de déplacement des aliens |                        |            |                                               |
+| Implémentation du changement de tir des aliens         |                        |            |                                               |
+| Implémentation des différents niveau du jeu            | Abstract Factory       |            |                                               |
+
+### Jalon n°5 - TP n°7
+
+| Fonctionnalité                             | Terminée ? | Auteur(s)                                     |
+| ------------------------------------------ | ---------- | --------------------------------------------- |
+| Correction des avertissements              |            |                                               |
+| Correction des défauts sur *SonarQube*     |            |                                               |
+| Rangement des classes en paquetages        |            |                                               |
+| Modularisation du projet                   |            |                                               |

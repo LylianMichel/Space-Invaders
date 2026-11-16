@@ -1,18 +1,27 @@
 package fr.univartois.butinfo.qdev.spaceinvaders.model.animated;
 
-import fr.univartois.butinfo.qdev.spaceinvaders.model.IAnimated;
-import fr.univartois.butinfo.qdev.spaceinvaders.model.SpaceInvadersGame;
+import fr.univartois.butinfo.qdev.spaceinvaders.model.*;
 import fr.univartois.butinfo.qdev.spaceinvaders.view.Sprite;
 
 public class SpaceShip extends AbstractAnimated {
+
+    private IIFrameState iFrameState = new IFrameHittable();
+    @Override
+    public boolean canBeHit() { return iFrameState.isHittable(); }
 
     public SpaceShip(SpaceInvadersGame game, double xPosition, double yPosition, Sprite sprite) {
         super(game, xPosition, yPosition, sprite);
     }
 
     @Override
+    public boolean onStep(long timeDelta) {
+        iFrameState = iFrameState.onStep(timeDelta);
+        return super.onStep(timeDelta);
+    }
+
+    @Override
     public void onCollisionWith(IAnimated other) {
-        // La réaction au type de l'autre objet est gérée par son double dispatch.
+        // Géré par double dispatch.
     }
 
     @Override
@@ -22,11 +31,23 @@ public class SpaceShip extends AbstractAnimated {
         }
     }
 
+    public void onHit() { iFrameState = iFrameState.onHit(); }
+
     @Override
     public void onCollisionWithShot(IAnimated shot) {
-        if (!isDestroyed() && !shot.isDestroyed()) {
-            game.removeAnimated(shot);
-            game.reducePlayerLife();
+        game.removeAnimated(shot);
+        game.playerIsDead();
+    }
+
+    @Override
+    public void onCollisionWithBonus(Bonus bonus) {
+        if (!isDestroyed() && !bonus.isDestroyed()) {
+            bonus.bonusEffect(this);
+            game.removeAnimated(bonus);
         }
+    }
+
+    public void gainInvulnerability() {
+        iFrameState = new IFrameNotHittable(5000);
     }
 }

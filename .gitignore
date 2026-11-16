@@ -5,6 +5,7 @@
 # Fichiers de Gradle.
 build
 .gradle
+/gradle.properties
 !gradle-wrapper.jar
 
 # Fichiers d'Eclipse.

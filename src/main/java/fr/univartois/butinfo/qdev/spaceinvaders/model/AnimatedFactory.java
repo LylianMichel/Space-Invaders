@@ -1,11 +1,15 @@
 package fr.univartois.butinfo.qdev.spaceinvaders.model;
 
+import fr.univartois.butinfo.qdev.spaceinvaders.model.animated.*;
 import fr.univartois.butinfo.qdev.spaceinvaders.view.ISpriteStore;
 
-public class AnimatedFactory implements IAnimatedFactory {
+import java.util.Random;
 
-    private ISpriteStore newspriteStore;
-    private SpaceInvadersGame newgame;
+public  class AnimatedFactory implements IAnimatedFactory {
+
+    protected ISpriteStore newspriteStore;
+    protected SpaceInvadersGame newgame;
+    protected static final Random rand = new Random();
 
     @Override
     public void setSpriteStore(ISpriteStore spriteStore) {
@@ -19,16 +23,35 @@ public class AnimatedFactory implements IAnimatedFactory {
 
     @Override
     public IAnimated createAlien(int x, int y) {
-        return null;
+        return new LifeDecorator(new VaisseauAlien(newgame ,x , y , newspriteStore.getSprite("alien")), newgame, 2);
     }
 
     @Override
     public IAnimated createShip(int x, int y) {
-        return null;
+        return new LifeDecorator(new SpaceShip(newgame ,x , y , newspriteStore.getSprite("ship")), newgame, 3);
     }
 
     @Override
-    public IAnimated createShot(int x, int y) {
-        return null;
+    public IAnimated createShot(int x, int y, int speed) {
+        return new Shoot(newgame , x , y , newspriteStore.getSprite("shot"), speed);
+
+    }
+
+    @Override
+    public IAnimated createBonus(int x, int y){
+            if(rand.nextBoolean()){
+                return new BonusLife(newgame , x , y , newspriteStore.getSprite("ufo"));
+            }
+            return new BonusInvulnerability(newgame , x , y , newspriteStore.getSprite("ufo"));
+
+    }
+
+    public IAnimated createWall(int x, int y) {
+        IWallProtectector broken = new WallBroken();
+        IWallProtectector cracked = new WallCracked(broken, newspriteStore.getSprite("empty-bricks"));
+        IWallProtectector intact = new WallIntact(cracked, newspriteStore.getSprite("cracked-bricks"));
+        return new Wall(newgame, x, y, newspriteStore.getSprite("bricks"), intact);
     }
 }
+
+
