@@ -127,6 +127,10 @@ public final class SpaceInvadersGame {
      */
     private ISpaceInvadersController controller;
 
+    private int niveau = 1;
+
+    private static final int NIVEAU_MAX = 3;
+
     /**
      * Crée une nouvelle instance de SpaceInvadersGame.
      *
@@ -214,6 +218,18 @@ public final class SpaceInvadersGame {
         return height - 100;
     }
 
+    public void setFactory(IAnimatedFactory factory) {
+        this.factory = factory;
+        factory.setSpriteStore(spriteStore);
+        factory.setGame(this);
+    }
+
+    private void niveauSuivant(){
+        niveau++;
+        setFactory(new LevelFactory(niveau));
+        createAnimated();
+    }
+
     /**
      * Prépare une partie de Space-Invaders sur le contrôleur de l'application.
      */
@@ -232,6 +248,8 @@ public final class SpaceInvadersGame {
      * Cette méthode permet également de redémarrer une nouvelle partie.
      */
     public void start() {
+        niveau=1;
+        setFactory(new LevelFactory(niveau));
         initStatistics();
         createAnimated();
         animation.start();
@@ -363,8 +381,13 @@ public final class SpaceInvadersGame {
         aliens.remove(alien);
         nbRemainingAliens--;
         if (nbRemainingAliens == 0) {
-            animation.stop();
-            controller.gameOver("You win !");
+            if (niveau < NIVEAU_MAX) {
+                niveauSuivant();
+            }
+            else {
+                animation.stop();
+                controller.gameOver("You win !");
+            }
         }
     }
 

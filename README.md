@@ -348,13 +348,13 @@ Martin a participe au test du space invaders
 ### Jalon n°4 - TP n°6
 
 | Fonctionnalité                                         | Patron de Conception ? | Terminée ? | Auteur(s)                                     |
-| ------------------------------------------------------ | ---------------------- | ---------- | --------------------------------------------- |
+| ------------------------------------------------------ |------------------------| ---------- | --------------------------------------------- |
 | Définition d'un seul `SpriteStore`                     |                        |            |                                               |
 | Définition d'une seule instance quand c'est possible   |                        |            |                                               |
 | Implémentation du déplacement des aliens en escadrille |                        |            |                                               |
 | Implémentation du changement de déplacement des aliens |                        |            |                                               |
 | Implémentation du changement de tir des aliens         |                        |            |                                               |
-| Implémentation des différents niveau du jeu            |                        |            |                                               |
+| Implémentation des différents niveau du jeu            | Abstract Factory       |            |                                               |
 
 ### Jalon n°5 - TP n°7
 
