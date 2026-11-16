@@ -1,7 +1,7 @@
 package fr.univartois.butinfo.qdev.spaceinvaders.model.animated;
 
 import fr.univartois.butinfo.qdev.spaceinvaders.model.IAnimated;
-import fr.univartois.butinfo.qdev.spaceinvaders.view.SpaceInvadersGame;
+import fr.univartois.butinfo.qdev.spaceinvaders.model.SpaceInvadersGame;
 import fr.univartois.butinfo.qdev.spaceinvaders.view.Sprite;
 
 /** Tir qui monte et disparaît aux limites de l'écran ou lors d'une collision. */

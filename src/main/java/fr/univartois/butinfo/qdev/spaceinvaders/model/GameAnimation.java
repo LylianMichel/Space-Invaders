@@ -28,7 +28,7 @@ import javafx.animation.AnimationTimer;
  *
  * @version 0.1.0
  */
-public final class GameAnimation extends AnimationTimer {
+final class GameAnimation extends AnimationTimer {
 
     /**
      * La partie en cours.
