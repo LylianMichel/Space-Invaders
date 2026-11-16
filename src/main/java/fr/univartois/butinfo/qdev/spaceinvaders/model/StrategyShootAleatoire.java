@@ -1,14 +1,14 @@
 package fr.univartois.butinfo.qdev.spaceinvaders.model;
 
-import fr.univartois.butinfo.qdev.spaceinvaders.model.animated.VaisseauAlien;
 import fr.univartois.butinfo.qdev.spaceinvaders.view.Sprite;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
-public class StrategyShootAleatoire implements StrategyShoot{
+public class StrategyShootAleatoire implements StrategyShoot {
     private final Random random = new Random();
-    private long lastshot = System.currentTimeMillis();
-    private long delay = nextDelay();
+    private final Map<IAnimated, Long> nextShot = new HashMap<>();
 
     private long nextDelay() {
         return 1000 + random.nextInt(4000); // entre 1s et 5s
@@ -17,12 +17,13 @@ public class StrategyShootAleatoire implements StrategyShoot{
     @Override
     public boolean onShoot(IAnimated vaisseau, SpaceInvadersGame game, Sprite sprite) {
         long now = System.currentTimeMillis();
+        long prochain = nextShot.computeIfAbsent(vaisseau, v -> now + nextDelay());
 
-        if(now - lastshot > delay){
-            lastshot = now;
-            delay = nextDelay();
+        if (now >= prochain) {
+            nextShot.put(vaisseau, now + nextDelay());
             game.alienShot(vaisseau);
+            return true;
         }
-        return true;
+        return false;
     }
 }
