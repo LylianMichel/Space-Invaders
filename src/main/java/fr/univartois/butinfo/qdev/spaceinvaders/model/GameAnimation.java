@@ -28,7 +28,7 @@ import javafx.animation.AnimationTimer;
  *
  * @version 0.1.0
  */
-final class GameAnimation extends AnimationTimer {
+public final class GameAnimation extends AnimationTimer {
 
     /**
      * La liste des objets mobiles dans le jeu.

@@ -1,9 +1,11 @@
 package fr.univartois.butinfo.qdev.spaceinvaders.model;
 
+import fr.univartois.butinfo.qdev.spaceinvaders.view.SpaceInvadersGame;
+
 import fr.univartois.butinfo.qdev.spaceinvaders.model.animated.VaisseauAlien;
 import fr.univartois.butinfo.qdev.spaceinvaders.view.Sprite;
 
-public class StrategyMouvementSpeed extends VaisseauAlien implements StrategyMouvement {
+public class StrategyMouvementSpeed extends VaisseauAlien {
     public StrategyMouvementSpeed(SpaceInvadersGame game, double x, double y, Sprite sprite) {
         super(game, x, y, sprite);
     }
@@ -21,7 +23,7 @@ public class StrategyMouvementSpeed extends VaisseauAlien implements StrategyMou
             setVerticalSpeed(150);
         }
 
-        boolean limiteEcran = super.onStep(delta);
+        boolean limiteEcran = move(delta);
 
         if (!limiteEcran && !attaque) {
             setHorizontalSpeed(-getHorizontalSpeed());

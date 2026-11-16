@@ -1,5 +1,7 @@
 package fr.univartois.butinfo.qdev.spaceinvaders.model;
 
+import fr.univartois.butinfo.qdev.spaceinvaders.view.SpaceInvadersGame;
+
 import java.util.Random;
 import fr.univartois.butinfo.qdev.spaceinvaders.model.animated.VaisseauAlien;
 import fr.univartois.dpprocessor.designpatterns.strategy.StrategyDesignPattern;
@@ -11,7 +13,7 @@ public class StrategyMouvementAleatoire implements StrategyMouvement {
 
     @Override
     public boolean onStep(VaisseauAlien vaisseau, long delta, SpaceInvadersGame game) {
-        boolean limiteEcran = vaisseau.onStep(delta);
+        boolean limiteEcran = vaisseau.move(delta);
         if (!limiteEcran) {
             vaisseau.setHorizontalSpeed(-vaisseau.getHorizontalSpeed());
             vaisseau.setVerticalSpeed(vaisseau.getVerticalSpeed() * 1.02);

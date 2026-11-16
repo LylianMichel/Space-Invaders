@@ -1,10 +1,15 @@
 package fr.univartois.butinfo.qdev.spaceinvaders.model;
 
-public class StrategyShootBase implements StrategyShoot {
-import fr.univartois.butinfo.qdev.spaceinvaders.model.animated.VaisseauAlien;
-import fr.univartois.butinfo.qdev.spaceinvaders.view.Sprite;
+public final class StrategyShootBase implements StrategyShoot {
 
-public class StrategyShootBase implements StrategyShoot{
+    private static final StrategyShootBase INSTANCE = new StrategyShootBase();
+
+    private StrategyShootBase() {
+    }
+
+    public static StrategyShootBase getInstance() {
+        return INSTANCE;
+    }
 
     @Override
     public boolean onShoot() {

@@ -34,13 +34,28 @@ import javafx.scene.image.Image;
  *
  * @version 0.1.0
  */
-public final class SpriteStore implements ISpriteStore {
+public final class SpriteStore implements fr.univartois.butinfo.qdev.spaceinvaders.view.ISpriteStore {
+
+    /** L'unique instance du magasin de sprites. */
+    private static final SpriteStore INSTANCE = new SpriteStore();
 
     /**
      * La {@link Map} permettant de conserver en cache les différentes instances de
      * {@link Sprite} déjà chargées.
      */
     private final Map<String, Sprite> spriteCache = new HashMap<>();
+
+    private SpriteStore() {
+    }
+
+    /**
+     * Donne accès à l'unique magasin de sprites.
+     *
+     * @return L'instance partagée du magasin.
+     */
+    public static SpriteStore getInstance() {
+        return INSTANCE;
+    }
 
     /*
      * (non-Javadoc)

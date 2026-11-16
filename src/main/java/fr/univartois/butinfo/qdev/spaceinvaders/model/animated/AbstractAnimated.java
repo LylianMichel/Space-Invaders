@@ -17,7 +17,7 @@
 package fr.univartois.butinfo.qdev.spaceinvaders.model.animated;
 
 import fr.univartois.butinfo.qdev.spaceinvaders.model.IAnimated;
-import fr.univartois.butinfo.qdev.spaceinvaders.model.SpaceInvadersGame;
+import fr.univartois.butinfo.qdev.spaceinvaders.view.SpaceInvadersGame;
 import fr.univartois.butinfo.qdev.spaceinvaders.view.Sprite;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.DoubleProperty;

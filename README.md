@@ -325,3 +325,4 @@ Martin a participe au test du space invaders
 | ------------------------------------------ | ---------------------- | ---------- | --------------------------------------------- |
 | Variantes de déplacement pour les aliens   |                        |            |                                               |
 | Variantes de tir pour les aliens           |                        |            |                                               |
+| Une instance unique de SpriteStore et des stratégies de base | Singleton | oui | |

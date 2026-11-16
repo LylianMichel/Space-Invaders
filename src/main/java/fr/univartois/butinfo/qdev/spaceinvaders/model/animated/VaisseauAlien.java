@@ -1,5 +1,7 @@
 package fr.univartois.butinfo.qdev.spaceinvaders.model.animated;
 
+import fr.univartois.butinfo.qdev.spaceinvaders.view.SpaceInvadersGame;
+
 import fr.univartois.butinfo.qdev.spaceinvaders.model.*;
 import fr.univartois.butinfo.qdev.spaceinvaders.view.Sprite;
 
@@ -12,8 +14,8 @@ public class VaisseauAlien extends AbstractAnimated {
         super(game, x, y, sprite);
         setHorizontalSpeed(75);
         setVerticalSpeed(50);
-        setStrategyShoot(new StrategyShootBase());
-        setStrategyMouvement(new StrategyMouvementBase());
+        setStrategyShoot(StrategyShootBase.getInstance());
+        setStrategyMouvement(StrategyMouvementBase.getInstance());
 
     }
 
@@ -35,6 +37,11 @@ public class VaisseauAlien extends AbstractAnimated {
     @Override
     public boolean onStep(long delta) {
         return strategyMouvement.onStep(this, delta, game);
+    }
+
+    /** Déplace le vaisseau sans rappeler sa stratégie de mouvement. */
+    public boolean move(long delta) {
+        return super.onStep(delta);
     }
 
     public boolean onShot(){

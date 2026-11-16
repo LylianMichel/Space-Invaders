@@ -14,12 +14,15 @@
  * Tous droits réservés.
  */
 
-package fr.univartois.butinfo.qdev.spaceinvaders.model;
+package fr.univartois.butinfo.qdev.spaceinvaders.view;
 
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import fr.univartois.butinfo.qdev.spaceinvaders.controller.SpaceInvadersController;
+import fr.univartois.butinfo.qdev.spaceinvaders.model.IAnimatedFactory;
+import fr.univartois.butinfo.qdev.spaceinvaders.model.IAnimated;
+import fr.univartois.butinfo.qdev.spaceinvaders.model.ISpaceInvadersController;
+import fr.univartois.butinfo.qdev.spaceinvaders.model.GameAnimation;
 import fr.univartois.butinfo.qdev.spaceinvaders.view.ISpriteStore;
 import fr.univartois.butinfo.qdev.spaceinvaders.view.Sprite;
 import javafx.animation.AnimationTimer;
