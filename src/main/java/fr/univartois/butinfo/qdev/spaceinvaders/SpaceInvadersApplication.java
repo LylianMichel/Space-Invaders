@@ -20,7 +20,7 @@ import java.io.IOException;
 
 import fr.univartois.butinfo.qdev.spaceinvaders.model.AnimatedFactory;
 import fr.univartois.butinfo.qdev.spaceinvaders.controller.SpaceInvadersController;
-import fr.univartois.butinfo.qdev.spaceinvaders.view.SpaceInvadersGame;
+import fr.univartois.butinfo.qdev.spaceinvaders.model.SpaceInvadersGame;
 import fr.univartois.butinfo.qdev.spaceinvaders.view.SpriteStore;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
