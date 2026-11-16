@@ -68,8 +68,11 @@ interface ISpriteStore {
 }
 
 class SpriteStore implements ISpriteStore {
+    - {static} INSTANCE : SpriteStore
     - spriteCache : Map<String, Sprite>
 
+    - SpriteStore()
+    + {static} getInstance() : SpriteStore
     + getSprite(identifier : String) : Sprite
     + getSprite(frameRate : int, identifiers : List<String>) : Sprite
     - loadImage(name : String) : Image
@@ -349,12 +352,29 @@ Martin a participe au test du space invaders
 
 | Fonctionnalité                                         | Patron de Conception ? | Terminée ? | Auteur(s)                                     |
 | ------------------------------------------------------ |------------------------| ---------- | --------------------------------------------- |
-| Définition d'un seul `SpriteStore`                     |                        |            |                                               |
-| Définition d'une seule instance quand c'est possible   |                        |            |                                               |
+| Définition d'un seul `SpriteStore`                     | Singleton              | oui        |                                               |
+| Définition d'une seule instance quand c'est possible   | Singleton              | oui        |                                               |
 | Implémentation du déplacement des aliens en escadrille |                        |            |                                               |
 | Implémentation du changement de déplacement des aliens |                        |            |                                               |
 | Implémentation du changement de tir des aliens         |                        |            |                                               |
 | Implémentation des différents niveau du jeu            | Abstract Factory       |            |                                               |
+
+#### Utilisation du Singleton
+
+`SpriteStore` utilise le patron **Singleton** : son constructeur est privé,
+son unique instance est conservée dans un attribut `private static final`
+et la méthode publique `getInstance()` renvoie toujours cette même instance.
+La classe est `final` pour empêcher l'héritage. On utilise donc
+`SpriteStore.getInstance()` à la place de `new SpriteStore()` afin de partager
+le même cache de sprites dans tout le jeu.
+
+Le même patron est appliqué à `IFrameHittable`, `WallBroken` et
+`StrategyMouvementBase`, car ces classes ne conservent aucune donnée propre
+à un vaisseau, à un mur ou à une partie. Leurs instances peuvent être partagées.
+En revanche, `IFrameNotHittable` garde une instance par utilisation, car sa durée
+d'invulnérabilité restante évolue indépendamment pour chaque objet. Les stratégies
+avec des compteurs ou des données de partie et les fabriques liées à une partie
+ou à un niveau conservent également leurs instances séparées.
 
 ### Jalon n°5 - TP n°7
 

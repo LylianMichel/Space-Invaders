@@ -13,11 +13,11 @@ public class LevelFactory extends AnimatedFactory{
 
     @Override
     public IAnimated createAlien(int x,int y){
-        VaisseauAlien alien = new VaisseauAlien(newgame,x,y,new SpriteStore().getSprite("alien"));
+        VaisseauAlien alien = new VaisseauAlien(newgame,x,y,SpriteStore.getInstance().getSprite("alien"));
 
         switch (level){
             case 1:
-                alien.setStrategyMouvement(new StrategyMouvementBase());
+                alien.setStrategyMouvement(StrategyMouvementBase.getInstance());
                 alien.setStrategyShoot(new StrategyShootBase());
                 break;
             case 2:

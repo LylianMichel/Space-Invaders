@@ -5,7 +5,7 @@ import fr.univartois.butinfo.qdev.spaceinvaders.view.Sprite;
 
 public class SpaceShip extends AbstractAnimated {
 
-    private IIFrameState iFrameState = new IFrameHittable();
+    private IIFrameState iFrameState = IFrameHittable.getInstance();
     @Override
     public boolean canBeHit() { return iFrameState.isHittable(); }
 
