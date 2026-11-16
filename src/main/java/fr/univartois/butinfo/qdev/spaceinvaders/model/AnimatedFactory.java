@@ -3,12 +3,14 @@ package fr.univartois.butinfo.qdev.spaceinvaders.model;
 import fr.univartois.butinfo.qdev.spaceinvaders.model.animated.*;
 import fr.univartois.butinfo.qdev.spaceinvaders.view.ISpriteStore;
 
+import java.util.List;
 import java.util.Random;
 
 public  class AnimatedFactory implements IAnimatedFactory {
 
     private ISpriteStore newspriteStore;
     private SpaceInvadersGame newgame;
+    private final StrategyShootComposite sharedShoot = new StrategyShootComposite(List.of(new StrategyShootBase(), new StrategyShootAleatoire(), new StrategyShootIntelligent()));
     private static final Random rand = new Random();
 
     @Override
