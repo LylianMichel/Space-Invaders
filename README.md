@@ -85,6 +85,7 @@ ISpriteStore --> Sprite : << crée >>
 ' -------------------- '
 
 class SpaceInvadersGame {
+    - {static} instance : SpaceInvadersGame
     + {static} SHIP_SPEED : double
     + {static} SHOT_TEMPORIZATION : long
     - width : int
@@ -101,7 +102,8 @@ class SpaceInvadersGame {
     - animation : AnimationTimer
     - controller : ISpaceInvadersController
 
-    + SpaceInvadersGame(width : int, height : int, spriteStore : ISpriteStore, factory : IAnimatedFactory)
+    - SpaceInvadersGame(width : int, height : int, spriteStore : ISpriteStore, factory : IAnimatedFactory)
+    + {static} getInstance(width : int, height : int, spriteStore : ISpriteStore, factory : IAnimatedFactory) : SpaceInvadersGame
     + setController(controller : ISpaceInvadersController) : void
     + getWidth() : int
     + getLeftLimit() : int
@@ -367,6 +369,13 @@ et la méthode publique `getInstance()` renvoie toujours cette même instance.
 La classe est `final` pour empêcher l'héritage. On utilise donc
 `SpriteStore.getInstance()` à la place de `new SpriteStore()` afin de partager
 le même cache de sprites dans tout le jeu.
+
+`SpaceInvadersGame` est également un Singleton, car l'application ne gère qu'un
+seul jeu à la fois. Son constructeur est privé et `getInstance(...)` crée le jeu
+au premier appel, puis renvoie toujours cette instance. Les paramètres servent
+uniquement à la première création. La méthode est `synchronized` pour empêcher
+deux appels simultanés de créer chacun une instance. La méthode `start()` permet
+de rejouer avec le même objet.
 
 Le même patron est appliqué à `IFrameHittable`, `WallBroken` et
 `StrategyMouvementBase`, car ces classes ne conservent aucune donnée propre

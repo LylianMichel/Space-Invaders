@@ -35,6 +35,26 @@ import javafx.beans.property.SimpleIntegerProperty;
  */
 public final class SpaceInvadersGame {
 
+    /** L'unique instance du jeu, créée lors du premier appel à getInstance. */
+    private static SpaceInvadersGame instance;
+
+    /**
+     * Donne accès à l'unique instance du jeu.
+     * Les paramètres sont utilisés uniquement lors du premier appel.
+     *
+     * @param width La largeur du jeu en pixels.
+     * @param height La hauteur du jeu en pixels.
+     * @param spriteStore Le magasin de sprites du jeu.
+     * @param factory La fabrique des objets du jeu.
+     * @return L'instance partagée du jeu.
+     */
+    public static synchronized SpaceInvadersGame getInstance(int width, int height,
+            ISpriteStore spriteStore, IAnimatedFactory factory) {
+        if (instance == null) {
+            instance = new SpaceInvadersGame(width, height, spriteStore, factory);
+        }
+        return instance;
+    }
 
     private static final Random random = new Random();
     /**
@@ -149,7 +169,7 @@ public final class SpaceInvadersGame {
      * @param factory L'instance de {@link IAnimatedFactory} permettant de créer les
      *        objets du jeu.
      */
-    public SpaceInvadersGame(int width, int height, ISpriteStore spriteStore,
+    private SpaceInvadersGame(int width, int height, ISpriteStore spriteStore,
                              IAnimatedFactory factory) {
         this.width = width;
         this.height = height;
