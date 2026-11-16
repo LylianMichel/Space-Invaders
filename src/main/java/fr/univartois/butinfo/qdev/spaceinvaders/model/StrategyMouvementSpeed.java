@@ -7,28 +7,23 @@ import java.util.Random;
 
 public class StrategyMouvementSpeed implements StrategyMouvement {
 
+    private static final double VITESSE_RAPIDE = 90;
     Random rand = new Random();
-
-    public void attaquer(VaisseauAlien vaisseau) {
-        vaisseau.setVerticalSpeed(150);
-    }
 
     @Override
     public boolean onStep(VaisseauAlien vaisseau, long delta, SpaceInvadersGame game) {
-        int tmp = rand.nextInt(100000);
-        if(tmp < 50) attaquer(vaisseau);
-
         boolean limiteEcran = vaisseau.onStepBase(delta);
+        if (limiteEcran) {
+            vaisseau.setVerticalSpeed(0);
 
-        if (!limiteEcran) {
-            vaisseau.setHorizontalSpeed(-vaisseau.getHorizontalSpeed());
-            vaisseau.setVerticalSpeed(vaisseau.getVerticalSpeed() * 1.02);
+            double vx = vaisseau.getHorizontalSpeed();
+            if (Math.abs(vx) < VITESSE_RAPIDE) {
+                vaisseau.setHorizontalSpeed(Math.signum(vx) * VITESSE_RAPIDE);
+            }
         }
-
         if (vaisseau.getY() + vaisseau.getHeight() >= game.getBottomLimit()) {
             game.alienReachedPlanet();
         }
-
         return limiteEcran;
     }
 

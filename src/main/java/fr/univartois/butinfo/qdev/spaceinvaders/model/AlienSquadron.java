@@ -62,7 +62,7 @@ public class AlienSquadron implements IAliensSquadron, IAnimated {
     public void moveVerticaly() {
         for (IAnimated alien : aliens) {
             alien.setHorizontalSpeed(-alien.getHorizontalSpeed() * 1.2);
-            alien.setVerticalSpeed(20000);
+            alien.setVerticalSpeed(15000);
         }
     }
     public void reverseHorizontally() {

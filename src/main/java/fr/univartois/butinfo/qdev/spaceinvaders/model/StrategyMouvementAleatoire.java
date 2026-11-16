@@ -29,20 +29,24 @@ public class StrategyMouvementAleatoire implements StrategyMouvement {
 
     @Override
     public boolean onStep(VaisseauAlien vaisseau, long delta, SpaceInvadersGame game) {
-        tirerInversion(game);
-
         boolean limiteEcran = vaisseau.onStepBase(delta);
+
         if (limiteEcran) {
-            // Comme StrategyMouvementBase : la descente demandée par l'escadron
-            // n'est qu'une impulsion d'une frame.
+            // L'alien a pu bouger : on annule la descente donnée par l'escadrille
             vaisseau.setVerticalSpeed(0);
+
+            // De temps en temps, l'alien change de direction au hasard
+            if (rand.nextInt(100000) < 50) {
+                vaisseau.setHorizontalSpeed(-vaisseau.getHorizontalSpeed());
+            }
         }
-        // Si limiteEcran est faux, l'alien a touché un bord : AlienSquadron inverse
-        // le sens de tous les aliens et les fait descendre, rien à faire ici.
+        // Si l'alien est au bord (limiteEcran == false), on ne fait rien :
+        // c'est l'escadrille qui gère le demi-tour et la descente.
 
         if (vaisseau.getY() + vaisseau.getHeight() >= game.getBottomLimit()) {
             game.alienReachedPlanet();
         }
+
         return limiteEcran;
     }
 
