@@ -3,6 +3,8 @@ package fr.univartois.butinfo.qdev.spaceinvaders.model;
 import fr.univartois.butinfo.qdev.spaceinvaders.model.animated.VaisseauAlien;
 import fr.univartois.butinfo.qdev.spaceinvaders.view.SpriteStore;
 
+import java.util.List;
+
 public class LevelFactory extends AnimatedFactory{
 
     private final int level;
@@ -15,20 +17,29 @@ public class LevelFactory extends AnimatedFactory{
     public IAnimated createAlien(int x,int y){
         VaisseauAlien alien = new VaisseauAlien(newgame,x,y,new SpriteStore().getSprite("alien"));
 
-        switch (level){
+        switch (level) {
             case 1:
                 alien.setStrategyMouvement(new StrategyMouvementBase());
                 alien.setStrategyShoot(new StrategyShootBase());
                 break;
             case 2:
-                alien.setStrategyMouvement(new StrategyMouvementSpeed());
-                alien.setStrategyShoot(new StrategyShootIntelligent());
+                MouvementCompositeEcran mouvement2 = new MouvementCompositeEcran();
+                mouvement2.add(new StrategyMouvementBase());
+                mouvement2.add(new StrategyMouvementSpeed());
+                alien.setStrategyMouvement(mouvement2);
+                alien.setStrategyShoot(new StrategyShootCompositeMoitie(
+                        new StrategyShootBase(), new StrategyShootAleatoire()));
                 break;
             case 3:
-                alien.setStrategyMouvement(new StrategyMouvementAleatoire());
-                alien.setStrategyShoot(new StrategyShootAleatoire());
+                MouvementCompositeAleatoire mouvement3 = new MouvementCompositeAleatoire();
+                mouvement3.add(new StrategyMouvementSpeed());
+                mouvement3.add(new StrategyMouvementAleatoire());
+                alien.setStrategyMouvement(mouvement3);
+                alien.setStrategyShoot(new StrategyShootComposite(List.of(
+                        new StrategyShootAleatoire(), new StrategyShootIntelligent())));
                 break;
         }
+
         return new LifeDecorator(alien,newgame,2);
     }
 

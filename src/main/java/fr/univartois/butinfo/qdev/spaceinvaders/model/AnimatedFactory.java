@@ -8,8 +8,8 @@ import java.util.Random;
 
 public  class AnimatedFactory implements IAnimatedFactory {
 
-    private ISpriteStore newspriteStore;
-    private SpaceInvadersGame newgame;
+    protected ISpriteStore newspriteStore;
+    protected SpaceInvadersGame newgame;
     private final StrategyShootComposite sharedShoot = new StrategyShootComposite(List.of(new StrategyShootBase(), new StrategyShootAleatoire(), new StrategyShootIntelligent()));
     private static final Random rand = new Random();
 
