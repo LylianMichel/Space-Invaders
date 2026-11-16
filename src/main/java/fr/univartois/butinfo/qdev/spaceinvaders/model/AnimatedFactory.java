@@ -37,6 +37,7 @@ public  class AnimatedFactory implements IAnimatedFactory {
     public IAnimated createAlien(int x, int y) {
         VaisseauAlien alien= new VaisseauAlien(newgame ,x , y , newspriteStore.getSprite("alien"));
         alien.setStrategyMouvement(sharedMouvement);
+        alien.setStrategyShoot(sharedShoot);
 
         return new LifeDecorator(alien, newgame, 2);
     }
