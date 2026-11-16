@@ -8,8 +8,8 @@ import java.util.Random;
 
 public  class AnimatedFactory implements IAnimatedFactory {
 
-    private ISpriteStore newspriteStore;
-    private SpaceInvadersGame newgame;
+    protected ISpriteStore newspriteStore;
+    protected SpaceInvadersGame newgame;
     private final StrategyShootComposite sharedShoot = new StrategyShootComposite(List.of(new StrategyShootBase(), new StrategyShootAleatoire(), new StrategyShootIntelligent()));
     // Une seule stratégie de mouvement pour tous les aliens : le changement de variante
     // est décidé une seule fois et s'applique à tout le monde en même temps.
@@ -18,7 +18,7 @@ public  class AnimatedFactory implements IAnimatedFactory {
 
     private static StrategyMouvement creerMouvementPartage() {
         MouvementCompositeAleatoire mouvement = new MouvementCompositeAleatoire();
-        mouvement.add(new StrategyMouvementBase());
+        mouvement.add(StrategyMouvementBase.getInstance());
         mouvement.add(new StrategyMouvementAleatoire());
         return mouvement;
     }
@@ -63,7 +63,7 @@ public  class AnimatedFactory implements IAnimatedFactory {
     }
 
     public IAnimated createWall(int x, int y) {
-        IWallProtectector broken = new WallBroken();
+        IWallProtectector broken = WallBroken.getInstance();
         IWallProtectector cracked = new WallCracked(broken, newspriteStore.getSprite("empty-bricks"));
         IWallProtectector intact = new WallIntact(cracked, newspriteStore.getSprite("cracked-bricks"));
         return new Wall(newgame, x, y, newspriteStore.getSprite("bricks"), intact);

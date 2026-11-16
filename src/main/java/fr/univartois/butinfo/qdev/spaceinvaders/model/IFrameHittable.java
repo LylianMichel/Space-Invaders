@@ -1,9 +1,15 @@
 package fr.univartois.butinfo.qdev.spaceinvaders.model;
 
-import fr.univartois.butinfo.qdev.spaceinvaders.view.SpriteStore;
-import javafx.beans.property.IntegerProperty;
+public final class IFrameHittable implements IIFrameState {
+    private static final IFrameHittable INSTANCE = new IFrameHittable();
 
-public class IFrameHittable implements IIFrameState {
+    private IFrameHittable() {
+    }
+
+    public static IFrameHittable getInstance() {
+        return INSTANCE;
+    }
+
     @Override
     public boolean isHittable() { return true; }
     @Override
