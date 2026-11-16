@@ -75,6 +75,18 @@ public interface IAnimatedFactory {
      *
      * @return Le tir qui a été créé.
      */
-    IAnimated createShot(int x, int y);
+    IAnimated createShot(int x, int y, int speed);
 
+
+    IAnimated createBonus(int x, int y);
+
+    /**
+     * Crée un nouvel objet animé représentant un mur de protection.
+     *
+     * @param x La position initiale de l'objet en x.
+     * @param y La position initiale de l'objet en y.
+     *
+     * @return Le mur qui a été créé.
+     */
+    IAnimated createWall(int x, int y);
 }

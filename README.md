@@ -17,6 +17,10 @@ Vous pouvez retrouver ci-dessous les liens vers les sujets de TP vous guidant
 dans le développement de votre projet :
 
 - [Lancement du projet *Space-Invaders*](https://gitlab.univ-artois.fr/enseignements-rwa/modules/but-2/r3-04/tp/-/tree/main/tp/TP03)
+- [Des patrons de conception dans *Space-Invaders* (1)](https://gitlab.univ-artois.fr/enseignements-rwa/modules/but-2/r3-04/tp/-/tree/main/tp/TP04)
+- [Des patrons de conception dans *Space-Invaders* (2)](https://gitlab.univ-artois.fr/enseignements-rwa/modules/but-2/r3-04/tp/-/tree/main/tp/TP05)
+- [Des patrons de conception dans *Space-Invaders* (3)](https://gitlab.univ-artois.fr/enseignements-rwa/modules/but-2/r3-04/tp/-/tree/main/tp/TP06)
+- [Bonnes pratiques de la POO dans le projet *Space-Invaders*](https://gitlab.univ-artois.fr/enseignements-rwa/modules/but-2/r3-04/tp/-/tree/main/tp/TP07)
 
 ## Diagramme de classes
 
@@ -323,6 +327,40 @@ Martin a participe au test du space invaders
 
 | Fonctionnalité                             | Patron de Conception ? | Terminée ? | Auteur(s)                                     |
 | ------------------------------------------ | ---------------------- | ---------- | --------------------------------------------- |
-| Variantes de déplacement pour les aliens   |                        |            |                                               |
-| Variantes de tir pour les aliens           |                        |            |                                               |
-| Une instance unique de SpriteStore et des stratégies de base | Singleton | oui | |
+| Variantes de déplacement pour les aliens   |   Strategy                     |  oui          |  Lylian Gautier                                             |
+| Variantes de tir pour les aliens           |   Strategy                     |  oui          |  Alice Maxence                                             |
+
+### Jalon n°3 - TP n°5
+
+| Fonctionnalité                             | Patron de Conception ? | Terminée ? | Auteur(s)                                     |
+| ------------------------------------------ | ---------------------- | ---------- | --------------------------------------------- |
+| Gestion des points de vie des aliens       |    Decorateur                    | oui           |  Alice                                             |
+| Gestion des points de vie du joueur        |    Decorateur                    | oui          |  Alice                                             |
+| Gestion de l'invulnérabilité               |    Etat                    |  oui          |  Martin                                             |
+| Implémentation de la vulnérabilité         |   Etat                     |  oui          |  Martin                                             |
+| Implémentation de l'invulnérabilité        |    Etat                    | oui           |   Martin                                            |
+| Gestion des bonus                          |    Decorateur                    | oui           |   Gautier                                            |
+| Implémentation du bonus de vie             |    Decorateur                    |  oui          |     Gautier                                          |
+| Implémentation du bonus d'invulnérabilité  |    Decorateur                    |   oui         |     Gautier                                          |
+| Gestion des murs de protection             |   Etat                     |   oui         |     Maxence                                          |
+| Implémentation des dégradations des murs   |   Etat                    |   oui         |   Maxence                                            |
+
+### Jalon n°4 - TP n°6
+
+| Fonctionnalité                                         | Patron de Conception ? | Terminée ? | Auteur(s)                                     |
+| ------------------------------------------------------ | ---------------------- | ---------- | --------------------------------------------- |
+| Définition d'un seul `SpriteStore`                     |                        |            |                                               |
+| Définition d'une seule instance quand c'est possible   |                        |            |                                               |
+| Implémentation du déplacement des aliens en escadrille |                        |            |                                               |
+| Implémentation du changement de déplacement des aliens |                        |            |                                               |
+| Implémentation du changement de tir des aliens         |                        |            |                                               |
+| Implémentation des différents niveau du jeu            |                        |            |                                               |
+
+### Jalon n°5 - TP n°7
+
+| Fonctionnalité                             | Terminée ? | Auteur(s)                                     |
+| ------------------------------------------ | ---------- | --------------------------------------------- |
+| Correction des avertissements              |            |                                               |
+| Correction des défauts sur *SonarQube*     |            |                                               |
+| Rangement des classes en paquetages        |            |                                               |
+| Modularisation du projet                   |            |                                               |

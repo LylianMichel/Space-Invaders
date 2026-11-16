@@ -6,18 +6,20 @@ import fr.univartois.butinfo.qdev.spaceinvaders.model.animated.VaisseauAlien;
 import fr.univartois.butinfo.qdev.spaceinvaders.view.Sprite;
 
 public class StrategyShootIntelligent implements StrategyShoot{
-    protected VaisseauAlien alien;
-    protected SpaceShip ship;
     protected final int ecart=10;
-
-    public StrategyShootIntelligent(VaisseauAlien alien, SpaceShip ship) {
-        this.alien=alien;
-        this.ship=ship;
-    }
+    long maintenant;
+    long lastShot;
 
     @Override
-    public boolean onShoot() {
-        return Math.abs(alien.getX() - ship.getX())<ecart;
+    public boolean onShoot(IAnimated vaisseau, SpaceInvadersGame game, Sprite sprite) {
+        maintenant = System.currentTimeMillis();
+
+        if (maintenant - lastShot > 2000 && Math.abs(vaisseau.getX() - game.ship.getX())<ecart) {
+            lastShot=maintenant;
+            game.alienShot(vaisseau);
+            return true;
+        }
+        return false;
     }
 
 }

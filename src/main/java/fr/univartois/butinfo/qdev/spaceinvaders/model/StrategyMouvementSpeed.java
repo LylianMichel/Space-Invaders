@@ -1,36 +1,31 @@
 package fr.univartois.butinfo.qdev.spaceinvaders.model;
 
-import fr.univartois.butinfo.qdev.spaceinvaders.view.SpaceInvadersGame;
-
 import fr.univartois.butinfo.qdev.spaceinvaders.model.animated.VaisseauAlien;
 import fr.univartois.butinfo.qdev.spaceinvaders.view.Sprite;
 
-public class StrategyMouvementSpeed extends VaisseauAlien {
-    public StrategyMouvementSpeed(SpaceInvadersGame game, double x, double y, Sprite sprite) {
-        super(game, x, y, sprite);
-    }
+import java.util.Random;
 
-    private boolean attaque = false;
+public class StrategyMouvementSpeed implements StrategyMouvement {
 
-    public void attaquer() {
-        attaque = true;
-        setVerticalSpeed(150);
+    Random rand = new Random();
+
+    public void attaquer(VaisseauAlien vaisseau) {
+        vaisseau.setVerticalSpeed(150);
     }
 
     @Override
-    public boolean onStep(long delta) {
-        if (attaque) {
-            setVerticalSpeed(150);
+    public boolean onStep(VaisseauAlien vaisseau, long delta, SpaceInvadersGame game) {
+        int tmp = rand.nextInt(100000);
+        if(tmp < 50) attaquer(vaisseau);
+
+        boolean limiteEcran = vaisseau.onStepBase(delta);
+
+        if (!limiteEcran) {
+            vaisseau.setHorizontalSpeed(-vaisseau.getHorizontalSpeed());
+            vaisseau.setVerticalSpeed(vaisseau.getVerticalSpeed() * 1.02);
         }
 
-        boolean limiteEcran = move(delta);
-
-        if (!limiteEcran && !attaque) {
-            setHorizontalSpeed(-getHorizontalSpeed());
-            setVerticalSpeed(getVerticalSpeed() * 1.02);
-        }
-
-        if (getY() + getHeight() >= game.getBottomLimit()) {
+        if (vaisseau.getY() + vaisseau.getHeight() >= game.getBottomLimit()) {
             game.alienReachedPlanet();
         }
 

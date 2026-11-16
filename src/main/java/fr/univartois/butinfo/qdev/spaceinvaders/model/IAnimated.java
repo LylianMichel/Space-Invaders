@@ -256,6 +256,8 @@ public interface IAnimated {
      */
     void onCollisionWith(IAnimated other);
 
+    void onCollisionWithBonus(Bonus bonus);
+
     /**
      * Réagit à une collision avec un alien.
      *
