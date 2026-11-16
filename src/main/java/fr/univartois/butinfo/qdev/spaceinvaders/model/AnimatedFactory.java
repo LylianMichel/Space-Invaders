@@ -18,7 +18,7 @@ public  class AnimatedFactory implements IAnimatedFactory {
 
     private static StrategyMouvement creerMouvementPartage() {
         MouvementCompositeAleatoire mouvement = new MouvementCompositeAleatoire();
-        mouvement.add(new StrategyMouvementBase());
+        mouvement.add(StrategyMouvementBase.getInstance());
         mouvement.add(new StrategyMouvementAleatoire());
         return mouvement;
     }
@@ -37,6 +37,7 @@ public  class AnimatedFactory implements IAnimatedFactory {
     public IAnimated createAlien(int x, int y) {
         VaisseauAlien alien= new VaisseauAlien(newgame ,x , y , newspriteStore.getSprite("alien"));
         alien.setStrategyMouvement(sharedMouvement);
+        alien.setStrategyShoot(sharedShoot);
 
         return new LifeDecorator(alien, newgame, 2);
     }
@@ -63,7 +64,7 @@ public  class AnimatedFactory implements IAnimatedFactory {
     }
 
     public IAnimated createWall(int x, int y) {
-        IWallProtectector broken = new WallBroken();
+        IWallProtectector broken = WallBroken.getInstance();
         IWallProtectector cracked = new WallCracked(broken, newspriteStore.getSprite("empty-bricks"));
         IWallProtectector intact = new WallIntact(cracked, newspriteStore.getSprite("cracked-bricks"));
         return new Wall(newgame, x, y, newspriteStore.getSprite("bricks"), intact);

@@ -13,6 +13,6 @@ public class IFrameNotHittable implements IIFrameState {
     @Override
     public IIFrameState onStep(long timeDelta) {
         remaining -= timeDelta;
-        return remaining <= 0 ? new IFrameHittable() : this;
+        return remaining <= 0 ? IFrameHittable.getInstance() : this;
     }
 }

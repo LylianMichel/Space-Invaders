@@ -36,6 +36,22 @@ import javafx.scene.image.Image;
  */
 public final class SpriteStore implements ISpriteStore {
 
+    /** L'unique instance du magasin de sprites. */
+    private static final SpriteStore INSTANCE = new SpriteStore();
+
+    /** Empêche la création d'autres magasins depuis l'extérieur. */
+    private SpriteStore() {
+    }
+
+    /**
+     * Donne accès à l'unique magasin de sprites.
+     *
+     * @return L'instance partagée du magasin.
+     */
+    public static SpriteStore getInstance() {
+        return INSTANCE;
+    }
+
     /**
      * La {@link Map} permettant de conserver en cache les différentes instances de
      * {@link Sprite} déjà chargées.
