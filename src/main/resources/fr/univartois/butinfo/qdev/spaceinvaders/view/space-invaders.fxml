@@ -13,7 +13,7 @@
     minHeight="-Infinity" maxHeight="-Infinity" minWidth="-Infinity" maxWidth="-Infinity"
     fx:controller="fr.univartois.butinfo.qdev.spaceinvaders.controller.SpaceInvadersController">
     <children>
-        <GridPane fx:id="backgroundPane" />
+        <GridPane fx:id="backgroundPane" snapToPixel="false" />
         <Pane fx:id="animatedPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
         <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
             <center>
