@@ -8,8 +8,6 @@ public final class StrategyMouvementBase implements StrategyMouvement{
 
     private static final StrategyMouvementBase INSTANCE = new StrategyMouvementBase();
 
-    private StrategyMouvementBase() {
-    }
 
     public static StrategyMouvementBase getInstance() {
         return INSTANCE;
