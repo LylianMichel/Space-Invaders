@@ -20,18 +20,11 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import fr.univartois.butinfo.qdev.spaceinvaders.controller.SpaceInvadersController;
-import fr.univartois.butinfo.qdev.spaceinvaders.model.animated.VaisseauAlien;
 import fr.univartois.butinfo.qdev.spaceinvaders.view.ISpriteStore;
 import fr.univartois.butinfo.qdev.spaceinvaders.view.Sprite;
 import javafx.animation.AnimationTimer;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-import fr.univartois.butinfo.qdev.spaceinvaders.model.animated.IWallProtectector;
-import fr.univartois.butinfo.qdev.spaceinvaders.model.animated.Wall;
-import fr.univartois.butinfo.qdev.spaceinvaders.model.animated.WallBroken;
-import fr.univartois.butinfo.qdev.spaceinvaders.model.animated.WallCracked;
-import fr.univartois.butinfo.qdev.spaceinvaders.model.animated.WallIntact;
 
 /**
  * La classe SpaceInvadersGame permet de gérer une partie du jeu Space-Invaders.

@@ -25,10 +25,17 @@ public  class AnimatedFactory implements IAnimatedFactory {
 
     @Override
     public IAnimated createAlien(int x, int y) {
-        VaisseauAlien alien = new VaisseauAlien(newgame, x , y, newspriteStore.getSprite("alien"));
-        alien.setStrategyShoot(sharedShoot);
+        VaisseauAlien alien= new VaisseauAlien(newgame ,x , y , newspriteStore.getSprite("alien"));
+
+
+        MouvementCompositeAleatoire mouvement=new MouvementCompositeAleatoire();
+        mouvement.add(new StrategyMouvementBase());
+        mouvement.add(new StrategyMouvementAleatoire());
+        alien.setStrategyMouvement(mouvement);
+
         return new LifeDecorator(alien, newgame, 2);
     }
+
 
     @Override
     public IAnimated createShip(int x, int y) {
