@@ -16,6 +16,8 @@
 
 package fr.univartois.butinfo.qdev.spaceinvaders.model;
 
+import fr.univartois.butinfo.qdev.spaceinvaders.model.SpaceInvadersGame;
+
 import fr.univartois.butinfo.qdev.spaceinvaders.view.ISpriteStore;
 import fr.univartois.butinfo.qdev.spaceinvaders.view.Sprite;
 import javafx.beans.property.IntegerProperty;

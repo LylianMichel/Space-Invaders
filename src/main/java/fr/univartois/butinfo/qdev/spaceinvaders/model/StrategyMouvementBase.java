@@ -10,8 +10,11 @@ public class StrategyMouvementBase implements StrategyMouvement{
     public boolean onStep(VaisseauAlien vaisseau, long delta, SpaceInvadersGame game) {
         boolean limiteEcran = vaisseau.onStepBase(delta);
         if (!limiteEcran) {
-            vaisseau.setHorizontalSpeed(-vaisseau.getHorizontalSpeed());
-            vaisseau.setVerticalSpeed(vaisseau.getVerticalSpeed() * 1.02);
+//            vaisseau.setHorizontalSpeed(-vaisseau.getHorizontalSpeed() * 1.02);
+//            vaisseau.setVerticalSpeed(20000);
+        }
+        else{
+            vaisseau.setVerticalSpeed(vaisseau.getVerticalSpeed() * 0);
         }
         if (vaisseau.getY() + vaisseau.getHeight() >= game.getBottomLimit()) {
             game.alienReachedPlanet();

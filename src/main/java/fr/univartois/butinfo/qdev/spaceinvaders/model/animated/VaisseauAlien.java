@@ -4,8 +4,9 @@ import fr.univartois.butinfo.qdev.spaceinvaders.model.*;
 import fr.univartois.butinfo.qdev.spaceinvaders.view.Sprite;
 
 public class VaisseauAlien extends AbstractAnimated {
-    private StrategyShoot strategyShoot;
-    private StrategyMouvement strategyMouvement;
+    public StrategyShoot strategyShoot;
+    public StrategyMouvement strategyMouvement;
+    public IAliensSquadron squadron;
 
 
     public VaisseauAlien(SpaceInvadersGame game, double x, double y, Sprite sprite) {
