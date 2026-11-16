@@ -14,7 +14,7 @@ public class StrategyShootBase implements StrategyShoot{
         if (maintenant - lastShot.getOrDefault(vaisseau, 0L) > 3000) {
             lastShot.put(vaisseau, maintenant);
             game.alienShot(vaisseau);
-
+            return true;
         }
         return false;
     }
