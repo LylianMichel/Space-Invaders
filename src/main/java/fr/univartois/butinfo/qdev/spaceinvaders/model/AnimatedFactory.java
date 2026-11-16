@@ -7,9 +7,9 @@ import java.util.Random;
 
 public  class AnimatedFactory implements IAnimatedFactory {
 
-    private ISpriteStore newspriteStore;
-    private SpaceInvadersGame newgame;
-    private static final Random rand = new Random();
+    protected ISpriteStore newspriteStore;
+    protected SpaceInvadersGame newgame;
+    protected static final Random rand = new Random();
 
     @Override
     public void setSpriteStore(ISpriteStore spriteStore) {
